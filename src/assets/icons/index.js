@@ -7,6 +7,7 @@ export { default as iconEdit } from './icon-edit.svg';
 export { default as iconHome } from './icon-home.svg';
 export { default as iconImage } from './icon-image.svg';
 export { default as iconLocation } from './icon-location.svg';
+export { default as iconLogo } from './icon-logo.svg';
 export { default as iconMinus } from './icon-minus.svg';
 export { default as iconMore } from './icon-more.svg';
 export { default as iconSearch } from './icon-search.svg';
