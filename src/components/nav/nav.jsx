@@ -1,6 +1,6 @@
 import React from 'react';
 
-const nav = () => {
+const Nav = () => {
   return (
     <div>
 
@@ -8,4 +8,4 @@ const nav = () => {
   );
 };
 
-export default nav;
+export default Nav;
