@@ -1,0 +1,12 @@
+.layoutContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .contentsContainer {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+nav {
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0rem -0.15rem 0.4rem 0rem $color-lightGray;
+  // box-shadow: -10px -10px 20px rgba(0, 0, 0, 0.2);
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        width: 2rem;
+      }
+
+      .title {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+}

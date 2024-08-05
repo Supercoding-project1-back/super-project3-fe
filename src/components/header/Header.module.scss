@@ -1,9 +1,7 @@
 @import '../../styles/variables.scss';
 
-.wrap {
+header {
   width: 100%;
-  position: fixed;
-  top: 0;
   display: flex;
   justify-content: space-between;
   padding: 1rem;

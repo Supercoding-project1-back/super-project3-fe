@@ -1,12 +1,11 @@
-import Header from "./components/header/Header";
-import Nav from "./components/nav/nav";
+import { RouterProvider } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Nav />
-    </div>
+    <>
+      <RouterProvider router={AppRoutes} />
+    </>
   );
 }
 

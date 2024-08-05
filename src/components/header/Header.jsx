@@ -4,7 +4,7 @@ import IconField from '../core/icon-feild/IconField';
 
 const Header = () => {
   return (
-    <div className={styles.wrap}>
+    <header>
       <div>
         <IconField
           type={'iconLogo'}
@@ -17,7 +17,7 @@ const Header = () => {
           className={`${styles.icon} ${styles.iconSearch}`}
         />
       </div>
-    </div>
+    </header>
   );
 }
 
