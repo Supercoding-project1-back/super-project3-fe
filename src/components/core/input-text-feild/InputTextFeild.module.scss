@@ -1,0 +1,30 @@
+@import "../../../styles/variables.scss";
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-size: $font-size-md;
+  color: $color-black;
+  font-family: $font-family-pretendard;
+
+  input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    font-size: $font-size-md;
+    color: $color-black;
+    font-family: $font-family-pretendard;
+
+    padding: 0.5rem;
+    font-size: $font-size-md;
+    background-color: $color-lightGray;
+    border: 1px solid $color-darkGray;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    &:focus {
+      border-color: $color-green;
+      outline: none;
+    }
+  }
+}
