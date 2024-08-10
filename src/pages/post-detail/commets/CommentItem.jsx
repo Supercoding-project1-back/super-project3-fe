@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CommentItem.module.scss';
-import IconField from '../../../components/core/icon-feild/IconField';
+import IconField from '../../../components/core/icon-field/IconField';
 
 const CommentItem = () => {
   return (
