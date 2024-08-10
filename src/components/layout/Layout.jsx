@@ -17,7 +17,7 @@ const Layout = () => {
 
     // 메인페이지 헤더
     if (path === '/') {
-      return <Header type={'main'} location={'서초구'} />
+      return <Header type={'main'} location={'강남구'} />
     }
 
     // 게시글상세페이지 헤더
