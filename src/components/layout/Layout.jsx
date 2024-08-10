@@ -30,7 +30,7 @@ const Layout = () => {
       return <Header type={'write'} />
     }
 
-    // 채팅 상세페이지 헤더
+    // 채팅상세페이지 헤더
     if (path.startsWith('/chat/') && path !== '/chat') {
       return <Header type={'chat'} />
     }
