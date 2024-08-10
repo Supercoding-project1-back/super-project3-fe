@@ -1,0 +1,40 @@
+@import '../../../styles/variables.scss';
+
+.commentItem {
+  width: 100%;
+  display: flex;
+  margin: 1rem 0;
+  border-bottom: 1px solid $color-lightGray;
+
+  .commentItemIcon {
+    .iconUserCircle {
+      width: 3rem;
+    }
+  }
+
+  .commentItemContent {
+    flex: 2;
+    margin-left: 0.5rem;
+
+    .commentItemHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .nickname {
+        font-weight: bold;
+      }
+
+      .iconMore {
+        width: 1.5rem;
+        transform: rotate(90deg);
+      }
+    }
+
+    .commentText {
+      width: calc(100% - 2rem);
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
+    }
+  }
+}
