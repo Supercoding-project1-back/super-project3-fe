@@ -1,1 +1,1 @@
-export { default as Icon } from "./icon-feild/IconField";
+export { default as Icon } from "./icon-field/IconField";
