@@ -1,12 +1,11 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../components/layout/Layout";
+import { Layout } from "../components/layout";
 import Main from "../pages/main/Main";
-import Login from "../pages/auth/Login";
-import SignUp from "../pages/auth/SignUp";
+import { Login, SignUp } from "../pages/auth";
 import PostDetail from "../pages/post-detail/PostDetail";
-import WritePost from "../pages/write-post/WritePost";
-import Chat from "../pages/chat";
+import { WritePost } from "../pages/write-post";
+import { Chat, ChatDetail } from "../pages/chat";
 import Profile from "../pages/profile/Profile";
 
 const AppRoutes = createBrowserRouter([
@@ -20,6 +19,7 @@ const AppRoutes = createBrowserRouter([
       { path: "post/:id", element: <PostDetail /> },
       { path: "post/new", element: <WritePost /> },
       { path: "chat", element: <Chat /> },
+      { path: "chat/:id", element: <ChatDetail /> },
       { path: "profile", element: <Profile /> },
     ],
   },
