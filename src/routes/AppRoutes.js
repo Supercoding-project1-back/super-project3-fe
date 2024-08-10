@@ -4,7 +4,7 @@ import { Layout } from "../components/layout";
 import Main from "../pages/main/Main";
 import { Login, SignUp } from "../pages/auth";
 import PostDetail from "../pages/post-detail/PostDetail";
-import WritePost from "../pages/write-post/WritePost";
+import { WritePost } from "../pages/write-post";
 import { Chat, ChatDetail } from "../pages/chat";
 import Profile from "../pages/profile/Profile";
 
