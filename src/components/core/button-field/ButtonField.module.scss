@@ -1,0 +1,21 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles//reset.scss";
+
+.button {
+  font-family: $font-family-pretendard;
+  border: 1px solid $color-green;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &.active {
+    background-color: $color-green;
+    color: $color-lightGray;
+  }
+
+  &.inactive {
+    background-color: $color-lightGray;
+    color: $color-darkGray;
+  }
+}
