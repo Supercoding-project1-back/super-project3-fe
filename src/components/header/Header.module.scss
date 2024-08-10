@@ -1,50 +1,13 @@
 @import '../../styles/variables.scss';
 
-.header {
+header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 1rem;
   background-color: $color-lightGray;
 
   .icon {
     width: 2.5rem;
-  }
-}
-
-.header.mainHeader {
-  .leftWrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: $font-size-lg;
-
-    .iconLocation {
-      width: 1.8rem;
-    }
-  }
-}
-
-.detailHeader,
-.writeHeader,
-.chatHeader {
-  .iconBack {
-    height: 1.8rem;
-  }
-}
-
-
-.writeHeader {
-  button {
-    font-size: $font-size-lg;
-  }
-}
-
-.chatHeader {
-  span {
-    font-weight: bold;
-    font-size: $font-size-lg;
   }
 }
