@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Header.module.scss';
-import IconField from '../core/icon-feild/IconField';
+import IconField from '../core/icon-field/IconField';
 
 const Header = () => {
   return (
