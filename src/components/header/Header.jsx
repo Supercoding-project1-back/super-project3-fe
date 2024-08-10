@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
-  console.log(window.history);
+  // console.log(window.history);
 
   const handleClickBack = () => {
     if (window.history.length > 2) {
@@ -13,6 +13,10 @@ const Header = ({ type, location }) => {
     } else {
       navigate('/');
     }
+  }
+
+  const handleClickLogo = () => {
+    navigate('/');
   }
 
   const headerContent = () => {
@@ -108,7 +112,7 @@ const Header = ({ type, location }) => {
         // 기본 헤더 : 로고+검색
         return (
           <header className={styles.header}>
-            <div className={styles.leftWrap}>
+            <div className={styles.leftWrap} onClick={handleClickLogo}>
               <IconField
                 type={'iconLogo'}
                 className={`${styles.icon} ${styles.iconLogo}`}
