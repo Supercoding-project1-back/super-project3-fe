@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.commnetInputWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: $color-white;
+  box-shadow: 0rem -0.15rem 0.4rem 0rem $color-lightGray;
+
+  .inputWrap {
+    flex: 1;
+    margin-right: 1rem;
+  }
+
+  .iconWrap {
+    .icon {
+      width: 2rem;
+    }
+  }
+}

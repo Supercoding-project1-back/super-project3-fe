@@ -1,2 +1,1 @@
-import PostDetail from './PostDetail';
-export default PostDetail;
+export { default as PostDetail } from "./PostDetail";
