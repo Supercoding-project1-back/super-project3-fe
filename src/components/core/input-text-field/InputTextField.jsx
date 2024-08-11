@@ -12,10 +12,15 @@ const InputTextField = ({
   onChange = () => { },
   onFocus = () => { },
   onBlur = () => { },
+  onKeyDown = () => { },
 }) => {
   const [value, setValue] = useState(initialValue);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {
@@ -38,6 +43,12 @@ const InputTextField = ({
     onBlur(name, e.target.value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onKeyDown(e);
+    }
+  };
+
   return (
     <label className={styles.label}>
       {label}
@@ -52,6 +63,7 @@ const InputTextField = ({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
         className={styles.input}
       />
     </label>
@@ -68,6 +80,7 @@ InputTextField.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 
 export default InputTextField;
