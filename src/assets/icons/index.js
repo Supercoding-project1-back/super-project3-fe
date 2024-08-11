@@ -3,6 +3,7 @@ export { default as iconChat } from './icon-chat.svg';
 export { default as iconCheck } from './icon-check.svg';
 export { default as iconCloseCircle } from './icon-close-circle.svg';
 export { default as iconClose } from './icon-close.svg';
+export { default as iconDelete } from './icon-delete.svg';
 export { default as iconEdit } from './icon-edit.svg';
 export { default as iconHome } from './icon-home.svg';
 export { default as iconImage } from './icon-image.svg';
