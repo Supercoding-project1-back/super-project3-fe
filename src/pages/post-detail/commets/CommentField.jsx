@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './CommentField.module.scss';
 import CommentList from './CommentList';
+import CommnetInput from './CommnetInput';
 
 const CommentField = () => {
   return (
@@ -11,6 +12,10 @@ const CommentField = () => {
       </div>
 
       <CommentList />
+      <CommentList />
+      <CommentList />
+      <CommentList />
+      <CommnetInput />
     </div>
   );
 };

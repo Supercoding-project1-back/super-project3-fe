@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './PostDetail.module.scss';
-import IconField from '../../components/core/icon-field/IconField';
-import CommentField from './commets/CommentField';
+import { IconField } from '../../components/core/icon-field';
+import { CommentField } from './commets';
 
 const PostDetail = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import styles from "./InputTextFeild.module.scss";
+import styles from "./InputTextField.module.scss";
 
 const InputTextField = ({
   label = "",
@@ -9,9 +9,9 @@ const InputTextField = ({
   type = "text",
   autoFocus = false,
   placeholder = "",
-  onChange = () => {},
-  onFocus = () => {},
-  onBlur = () => {},
+  onChange = () => { },
+  onFocus = () => { },
+  onBlur = () => { },
 }) => {
   const [value, setValue] = useState(initialValue);
   const [isFocused, setIsFocused] = useState(false);
