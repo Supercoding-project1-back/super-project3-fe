@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+
+.popularPosts {
+  margin-bottom: 20px;
+
+  .popularButton {
+    background-color: $color-apricot;
+    color: $color-darkGray;
+    border: 1px solid $color-white;
+    pointer-events: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .postItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+
+  .postImage {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .postDetails {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .postTitle {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .postViews {
+    font-size: 14px;
+    color: #888;
+  }
+}

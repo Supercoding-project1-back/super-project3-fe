@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from "react";
+import CategoryFilter from "./CategoryFilter";
+import PopularPosts from "./PopularPosts";
+import PostList from "./PostList";
 
 const Main = () => {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
-    <div>
-      메인입니다.
-    </div>
+    <>
+      <CategoryFilter onCategoryChange={handleCategoryChange} />
+      <PopularPosts selectedCategory={selectedCategory} />
+      <PostList selectedCategory={selectedCategory} />
+    </>
   );
 };
 
