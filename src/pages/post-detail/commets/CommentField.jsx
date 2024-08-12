@@ -44,11 +44,18 @@ const CommentField = () => {
         <span>{comments.length}</span>
       </div>
 
-      <CommentList
-        comments={comments}
-        onEditClick={(id, text) => setIsEditing({ id, text })}
-        deleteComment={deleteComment}
-      />
+      {comments.length > 0 ? (
+        <CommentList
+          comments={comments}
+          onEditClick={(id, text) => setIsEditing({ id, text })}
+          deleteComment={deleteComment}
+        />
+      ) : (
+        <div className={styles.noCommentMsg}>
+          <p>아직 댓글이 없어요! 첫 대글을 남겨보세요</p>
+        </div>
+      )}
+
       <CommentInput
         addComment={handleCommentInputSubmit}
         editComment={isEditing ? handleCommentInputSubmit : null}

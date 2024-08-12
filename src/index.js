@@ -4,6 +4,7 @@ import App from "./App";
 import './styles/fonts.scss';
 import './styles/variables.scss';
 import './styles/reset.scss';
+import './styles/global.scss';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

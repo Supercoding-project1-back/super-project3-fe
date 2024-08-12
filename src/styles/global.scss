@@ -1,0 +1,24 @@
+@import './variables.scss';
+
+/* 글꼴 크기 조정 방지 : 1rem = 16px 설정 */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  font-size: 100%;
+  margin: 0 auto;
+  font-family: $font-family-pretendard;
+  color: $color-black;
+}
+
+/* 클래스가 없는 a 요소의 기본 스타일 설정 */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+  text-decoration: none;
+}
+
+/* 고정된 항목에 여분의 스크롤 여백 추가 */
+:target {
+  scroll-margin-block: 5rem;
+}

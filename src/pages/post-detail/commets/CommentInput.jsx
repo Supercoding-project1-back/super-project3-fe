@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './CommentInput.module.scss';
-import { IconField } from '../../../components/core/icon-field';
-import { InputTextField } from '../../../components/core/input-text-field';
+import { Icon, TextareaField } from '../../../components/core';
 
 const CommentInput = ({ addComment, editComment, initialText }) => {
   const [text, setText] = useState(initialText);
@@ -16,6 +15,7 @@ const CommentInput = ({ addComment, editComment, initialText }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleSubmitComment();
     }
   }
@@ -34,7 +34,15 @@ const CommentInput = ({ addComment, editComment, initialText }) => {
   return (
     <div className={styles.commnetInputWrap}>
       <div className={styles.inputWrap}>
-        <InputTextField
+        {/* <InputTextField
+          name="comment"
+          value={text}
+          placeholder={'댓글을 입력해주세요'}
+          onChange={handleChangeInput}
+          onKeyDown={handleKeyDown}
+        /> */}
+
+        <TextareaField
           name="comment"
           value={text}
           placeholder={'댓글을 입력해주세요'}
@@ -46,7 +54,7 @@ const CommentInput = ({ addComment, editComment, initialText }) => {
         className={styles.iconWrap}
         onClick={handleSubmitComment}
       >
-        <IconField
+        <Icon
           type={'iconSend'}
           className={`${styles.icon} ${styles.iconSend}`}
         />
