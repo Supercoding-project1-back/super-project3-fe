@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./TextareaField.module.scss";
 
 const TextareaField = ({
+  className = '',
   label = "",
   name,
   value: initialValue = "",
@@ -51,7 +52,7 @@ const TextareaField = ({
   };
 
   return (
-    <div className={styles.label}>
+    <div className={`${styles.label} ${className}`}>
       {label && <span className={styles.labelText}>{label}</span>}
       <textarea
         id={`textarea_${name}`}
