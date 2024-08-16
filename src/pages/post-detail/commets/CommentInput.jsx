@@ -34,20 +34,14 @@ const CommentInput = ({ addComment, editComment, initialText }) => {
   return (
     <div className={styles.commnetInputWrap}>
       <div className={styles.inputWrap}>
-        {/* <InputTextField
-          name="comment"
-          value={text}
-          placeholder={'댓글을 입력해주세요'}
-          onChange={handleChangeInput}
-          onKeyDown={handleKeyDown}
-        /> */}
-
         <TextareaField
-          name="comment"
+          name={text}
           value={text}
           placeholder={'댓글을 입력해주세요'}
+          rows={1}
           onChange={handleChangeInput}
           onKeyDown={handleKeyDown}
+          submitOnEnter={true}
         />
       </div>
       <div

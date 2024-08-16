@@ -23,6 +23,8 @@
     background-color: $color-lightGray;
     border: 1px solid $color-darkGray;
     border-radius: 4px;
+    white-space: pre-wrap;
+    resize: none;
 
     &:focus {
       border-color: $color-green;

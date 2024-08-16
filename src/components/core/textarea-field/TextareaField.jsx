@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import styles from "./TextareaField.module.scss";
 
 const TextareaField = ({
-  className = '',
+  className = "",
   label = "",
   name,
   value: initialValue = "",
   autoFocus = false,
   placeholder = "",
-  rows = 1,
+  rows,
+  submitOnEnter = false,
   onChange = () => { },
   onFocus = () => { },
   onBlur = () => { },
@@ -45,18 +46,19 @@ const TextareaField = ({
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && submitOnEnter) {
       e.preventDefault();
       onKeyDown(e);
     }
   };
 
   return (
-    <div className={`${styles.label} ${className}`}>
+    <div className={styles.label}>
       {label && <span className={styles.labelText}>{label}</span>}
       <textarea
         id={`textarea_${name}`}
         value={value}
+        className={`${styles.textarea} ${className}`}
         placeholder={
           (!isFocused && !value) || (!value && isFocused) ? placeholder : ""
         }
@@ -66,7 +68,6 @@ const TextareaField = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
-        className={styles.textarea}
       />
     </div>
   );
@@ -83,6 +84,7 @@ TextareaField.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onKeyDown: PropTypes.func,
+  submitOnEnter: PropTypes.bool,
 };
 
 export default TextareaField;
