@@ -1,0 +1,90 @@
+@import "../../../styles/variables.scss";
+
+.ModalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ModalOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-black, 0.5);
+}
+
+.ModalContainer {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  background-color: $color-white;
+  border-radius: 0.7rem;
+  padding: 1rem;
+  z-index: 1001;
+}
+
+.CloseButtonContainer {
+  position: absolute;
+  top: 1rem;
+
+  img {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+  }
+}
+
+/* defaultModal 스타일 */
+.defaultModal .CloseButtonContainer {
+  right: 1rem;
+}
+
+/* fullscreenModal 스타일 */
+.isFullScreen {
+  background-color: rgba($color-black, 0.8);
+
+  .ModalContainer {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .CloseButtonContainer {
+    left: 1rem;
+  }
+}
+
+/* popupModal 스타일 */
+.popupModal {
+  justify-content: flex-end;
+  align-items: flex-end;
+  transition: transform 0.3s ease-out;
+
+  .ModalContainer {
+    width: 100%;
+    max-width: none;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    background-color: $color-white;
+  }
+
+  &.enter {
+    transform: translateY(100%); /* 초기 위치 */
+  }
+
+  &.enter-active {
+    transform: translateY(0); /* 목표 위치 */
+  }
+}
