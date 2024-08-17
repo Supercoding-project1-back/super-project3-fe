@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.svg-icon {
+  width: 300px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.KakaoButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.kakaoBtnImage {
+  width: 200px; /* 버튼 이미지 크기 */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
