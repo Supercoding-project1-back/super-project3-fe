@@ -7,6 +7,7 @@ const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
 
+
   const handleClickBack = () => {
     if (window.history.length > 2) {
       navigate(-1);

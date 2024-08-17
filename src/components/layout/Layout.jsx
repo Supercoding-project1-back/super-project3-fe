@@ -9,6 +9,7 @@ const Layout = () => {
   const path = location.pathname;
   // console.log(location.pathname);
 
+
   const renderHeader = () => {
     // 로그인/회원가입 헤더 : 없음
     if (path === '/login' || path === '/signup') {
