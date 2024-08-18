@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Portal from "./Portal";
 import styles from "./ModalField.module.scss";
 import { useNavigate } from "react-router-dom";
-import closeIcon from "../../../assets/icons/icon-close.svg";
+import { Icon } from "..";
 
 const ModalField = ({ open, onClose, children, variant, customClass }) => {
   const navigate = useNavigate();
@@ -47,8 +47,8 @@ const ModalField = ({ open, onClose, children, variant, customClass }) => {
         <div className={styles.ModalOverlay} onClick={onClose} />
         <div className={styles.ModalContainer}>
           {variant !== "popupModal" && (
-            <div className={styles.CloseButtonContainer}>
-              <img src={closeIcon} alt="모달창 닫기 버튼" onClick={onClose} />
+            <div className={styles.CloseButtonContainer} onClick={onClose} >
+              <Icon type={'iconClose'} className={styles.icon} />
             </div>
           )}
           {children}
