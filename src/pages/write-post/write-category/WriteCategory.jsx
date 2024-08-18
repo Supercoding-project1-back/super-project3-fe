@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from '../../../components/core'
 
-const WriteCategory = ({ handleChangeCatergory }) => {
+const WriteCategory = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const categories = ['일상', '질문', '구매'];
 
   const handleClickCategory = (category) => {
     setActiveCategory(category);
-    handleChangeCatergory(category);
     // console.log(category);
   }
 

@@ -1,0 +1,54 @@
+@import '../../../styles/variables.scss';
+
+
+.voteWrap {
+  // border: 1px solid red;
+
+  ul.voteInputWrap {
+    li {
+      border-bottom: 1px solid $color-lightGray;
+      display: flex;
+      justify-content: space-between;
+
+      .voteInput {
+        background: $color-white;
+        border: none;
+        padding: 1rem;
+      }
+
+      .icon {
+        width: 2rem;
+      }
+    }
+  }
+
+  .buttonWrap {
+    margin: 1.5rem 0;
+
+    &>button {
+      width: 100%;
+      background: $color-lightGray;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      // 항목 추가 버튼 활성화 : hover시
+      &:hover {
+        color: $color-white;
+        background: $color-green;
+      }
+
+      // 항목 추가버튼 비활성화 상태
+      &:disabled {
+        cursor: not-allowed;
+        color: $color-darkGray;
+
+        &:hover {
+          background: $color-lightGray;
+        }
+      }
+    }
+  }
+}

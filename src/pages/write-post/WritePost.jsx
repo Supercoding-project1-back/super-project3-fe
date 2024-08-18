@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import styles from './WritePost.module.scss';
-import { WriteCategory, WriteTitle, WriteContents } from './';
-import { useNavigate } from 'react-router-dom';
+import { WriteCategory, WriteTitle, WriteContents, WriteVote } from './';
 import { Icon } from '../../components/core';
+import useModal from '../../hooks/useModal';
+
 
 const WritePost = () => {
-  const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const handleChangeCatergory = (category) => {
-    setSelectedCategory(category)
-  }
+  const { Modal, openModalHandler, closeModalHandler } = useModal(null);
 
   return (
     <>
       <section className={styles.wrap}>
         <WriteCategory
-          handleChangeCatergory={handleChangeCatergory}
         />
       </section>
 
@@ -28,6 +23,10 @@ const WritePost = () => {
         <WriteContents />
       </section>
 
+      <Modal variant="fullscreenModal" customClass={styles.voteModal}>
+        <WriteVote />
+      </Modal>
+
       <section className={`${styles.wrap} ${styles.buttonsWrap}`}>
         <ul>
           <li>
@@ -38,7 +37,7 @@ const WritePost = () => {
             <Icon type={'iconLocation'} className={styles.icon} />
             <span>위치</span>
           </li>
-          <li>
+          <li onClick={openModalHandler}>
             <Icon type={'iconVote'} className={styles.icon} />
             <span>투표</span>
           </li>
