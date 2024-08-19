@@ -3,6 +3,7 @@ import { Header } from '../header';
 import { Nav } from '../nav';
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Layout.module.scss';
+import { PostFormProvider } from '../../contexts/PostFormContext';
 
 const Layout = () => {
   const location = useLocation();
@@ -49,13 +50,15 @@ const Layout = () => {
 
   return (
     <>
-      <div className={styles.layoutContainer}>
-        {renderHeader()}
-        <div className={styles.contentsContainer}>
-          <Outlet />
+      <PostFormProvider>
+        <div className={styles.layoutContainer}>
+          {renderHeader()}
+          <div className={styles.contentsContainer}>
+            <Outlet />
+          </div>
+          {renderNav()}
         </div>
-        {renderNav()}
-      </div>
+      </PostFormProvider>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './WritePost.module.scss';
 import { WriteCategory, WriteTitle, WriteContents, WriteVote } from './';
 import { Icon } from '../../components/core';
@@ -6,13 +6,12 @@ import useModal from '../../hooks/useModal';
 
 
 const WritePost = () => {
-  const { Modal, openModalHandler, closeModalHandler } = useModal(null);
+  const { Modal, openModalHandler } = useModal(null);
 
   return (
     <>
       <section className={styles.wrap}>
-        <WriteCategory
-        />
+        <WriteCategory />
       </section>
 
       <section className={styles.wrap}>
