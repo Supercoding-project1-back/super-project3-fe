@@ -1,0 +1,23 @@
+.iconUserCircle {
+  width: 3rem;
+}
+
+.nickname {
+  margin-left: 0.25rem;
+}
+
+.details {
+  display: flex;
+
+  .detailInfos {
+    display: flex;
+
+    .iconTime {
+      width: 1rem;
+    }
+
+    .iconViews {
+      width: 1.25rem;
+    }
+  }
+}

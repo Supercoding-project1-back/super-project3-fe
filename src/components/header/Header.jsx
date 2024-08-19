@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Header.module.scss';
 import IconField from '../core/icon-field/IconField';
 import { useNavigate } from 'react-router';
+import { PostFormContext } from '../../contexts/PostFormContext';
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
+
+  const { addPost } = useContext(PostFormContext);
+
 
   const handleClickBack = () => {
     if (window.history.length > 2) {
@@ -18,6 +22,24 @@ const Header = ({ type, location }) => {
   const handleClickLogo = () => {
     navigate('/');
   }
+
+  // const handleSubmit = () => {
+  //   const newPost = {
+  //     id: Date.now(),
+  //     category,
+  //     title,
+  //     contents,
+  //     createdAt: new Date(),
+  //   };
+
+  //   // 게시글 등록
+  //   addPost(newPost);
+
+  //   // 메인 페이지로 이동
+  //   navigate('/');
+  // };
+
+
 
   const headerContent = () => {
     switch (type) {
@@ -79,7 +101,7 @@ const Header = ({ type, location }) => {
               />
             </div>
             <div className={styles.rightWrap}>
-              <button>등록</button>
+              <button onClick={addPost}>등록</button>
             </div>
           </header>
         );

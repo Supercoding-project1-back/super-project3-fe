@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CommentItem.module.scss';
-import { IconField } from '../../../components/core/icon-field';
+import { Icon } from '../../../components/core';
 
 const CommentItem = ({ comment, onEditClick, deleteComment }) => {
   const handleDeleteClick = (event) => {
@@ -12,7 +12,7 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
   return (
     <div className={styles.commentItem}>
       <div className={styles.commentItemIcon}>
-        <IconField
+        <Icon
           type={'iconUserCircle'}
           className={`${styles.iconUserCircle}`}
         />
@@ -22,19 +22,19 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
           <div className={styles.nickname}>{comment.author}</div>
           <div className={styles.iconWrap}>
             <div onClick={() => onEditClick(comment.id, comment.text)}>
-              <IconField
+              <Icon
                 type={'iconEdit'}
                 className={`${styles.icon} ${styles.iconEdit}`}
               />
             </div>
             <div onClick={handleDeleteClick}>
-              <IconField
+              <Icon
                 type={'iconDelete'}
                 className={`${styles.icon} ${styles.iconEdit}`}
               />
             </div>
             <div>
-              <IconField
+              <Icon
                 type={'iconChat'}
                 className={`${styles.icon} ${styles.iconChat}`}
               />

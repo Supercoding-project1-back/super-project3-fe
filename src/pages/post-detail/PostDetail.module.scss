@@ -1,40 +1,11 @@
 @import '../../styles/variables.scss';
 
 .wrap {
-  // border: 1px solid red;
-  padding: 0.5rem 0;
-
-  h1 {
-    font-family: $font-family-ohsquare;
-    font-size: $font-size-xl;
-  }
+  // border: 1px solid blue;
+  padding: 0.5rem;
 }
 
 // 게시글 : 게시글정보
 .postInfo {
   display: flex;
-
-  .iconUserCircle {
-    width: 3rem;
-  }
-
-  .nickname {
-    margin-left: 0.25rem;
-  }
-
-  .details {
-    display: flex;
-
-    .detailInfos {
-      display: flex;
-
-      .iconTime {
-        width: 1rem;
-      }
-
-      .iconViews {
-        width: 1.25rem;
-      }
-    }
-  }
 }

@@ -5,4 +5,17 @@
   padding-top: 1.4rem;
   position: relative;
   padding-bottom: 5rem;
+  // width: 100%;
+
+  .noCommentMsg {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 12.5rem;
+
+    p {
+      color: $color-darkGray;
+    }
+  }
 }

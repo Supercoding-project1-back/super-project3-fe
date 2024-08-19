@@ -1,0 +1,14 @@
+@import '../../../styles/variables.scss';
+
+.voteWrap {
+  border-radius: 0.5rem;
+  border: 2px solid $color-lightGray;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: $font-size-rg;
+    font-weight: bold;
+    padding: 1rem;
+  }
+}

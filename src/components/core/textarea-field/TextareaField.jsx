@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import styles from "./InputTextField.module.scss";
+import styles from "./TextareaField.module.scss";
 
-const InputTextField = ({
-  className = '',
+const TextareaField = ({
+  className = "",
   label = "",
   name,
   value: initialValue = "",
-  type = "text",
   autoFocus = false,
   placeholder = "",
+  rows,
+  submitOnEnter = false,
   onChange = () => { },
   onFocus = () => { },
   onBlur = () => { },
@@ -17,15 +18,15 @@ const InputTextField = ({
 }) => {
   const [value, setValue] = useState(initialValue);
   const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef(null);
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
 
   useEffect(() => {
-    if (autoFocus && inputRef.current) {
-      inputRef.current.focus();
+    if (autoFocus && textareaRef.current) {
+      textareaRef.current.focus();
     }
   }, [autoFocus]);
 
@@ -45,43 +46,45 @@ const InputTextField = ({
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && submitOnEnter) {
+      e.preventDefault();
       onKeyDown(e);
     }
   };
 
   return (
-    <label className={`${styles.label}`}>
-      {label}
-      <input
-        id={`input_${name}`}
+    <div className={styles.label}>
+      {label && <span className={styles.labelText}>{label}</span>}
+      <textarea
+        id={`textarea_${name}`}
         value={value}
-        type={type}
+        className={`${styles.textarea} ${className}`}
         placeholder={
           (!isFocused && !value) || (!value && isFocused) ? placeholder : ""
         }
-        ref={inputRef}
+        ref={textareaRef}
+        rows={rows}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
-        className={`${styles.input} ${className}`}
       />
-    </label>
+    </div>
   );
 };
 
-InputTextField.propTypes = {
+TextareaField.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  type: PropTypes.oneOf(["text", "password", "number", "price"]),
+  value: PropTypes.string,
   autoFocus: PropTypes.bool,
   placeholder: PropTypes.string,
+  rows: PropTypes.number,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   onKeyDown: PropTypes.func,
+  submitOnEnter: PropTypes.bool,
 };
 
-export default InputTextField;
+export default TextareaField;
