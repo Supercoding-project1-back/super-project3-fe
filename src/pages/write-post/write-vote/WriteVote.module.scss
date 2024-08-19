@@ -10,14 +10,24 @@
       display: flex;
       justify-content: space-between;
 
-      .voteInput {
-        background: $color-white;
-        border: none;
-        padding: 1rem;
+      .inputWrap {
+        flex: 2;
+        margin-right: 1rem;
+
+        .voteInput {
+          background: $color-white;
+          border: none;
+          padding: 1rem;
+        }
       }
 
-      .icon {
-        width: 2rem;
+      .iconWrap {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          width: 2rem;
+        }
       }
     }
   }
@@ -52,3 +62,11 @@
     }
   }
 }
+
+// div.btn {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   margin: 1rem;
+//   padding: 0.5rem;
+// }

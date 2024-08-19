@@ -34,39 +34,46 @@ const WriteVote = () => {
   }
 
   return (
-    <div className={styles.voteWrap}>
-      <ul className={styles.voteInputWrap}>
-        {voteItems.map((voteItem, index) => {
-          return (
-            <li key={voteItem.id}>
-              <InputTextField
-                className={styles.voteInput}
-                name={voteItem.text}
-                value={voteItem.text}
-                placeholder='항목을 입력해주세요'
-                rows={1}
-                onChange={(value) => handleChangeVoteItem(index, value)}
-              />
+    <>
+      <div className={styles.voteWrap}>
+        <ul className={styles.voteInputWrap}>
+          {voteItems.map((voteItem, index) => {
+            return (
+              <li key={voteItem.id}>
+                <div className={styles.inputWrap}>
+                  <InputTextField
+                    className={styles.voteInput}
+                    name={voteItem.text}
+                    value={voteItem.text}
+                    placeholder='항목을 입력해주세요'
+                    rows={1}
+                    onChange={(value) => handleChangeVoteItem(index, value)}
+                  />
+                </div>
 
-              {voteItem.delete && (
-                <Icon
-                  type={'iconDelete'}
-                  className={styles.icon}
-                  onClick={() => handleRemoveVoteItem(voteItem.id)}
-                />
-              )}
-            </li>
-          )
-        })}
+                <div className={styles.iconWrap}>
+                  {voteItem.delete && (
+                    <Icon
+                      type={'iconDelete'}
+                      className={styles.icon}
+                      onClick={() => handleRemoveVoteItem(voteItem.id)}
+                    />
+                  )}
+                </div>
+              </li>
+            )
+          })}
 
-      </ul>
-      <div className={styles.buttonWrap}>
-        <button
-          onClick={handleAddVoteItem}
-          disabled={voteItems.length >= 4}
-        >항목 추가</button>
+        </ul>
+        <div className={styles.buttonWrap}>
+          <button
+            onClick={handleAddVoteItem}
+            disabled={voteItems.length >= 4}
+          >항목 추가</button>
+        </div>
       </div>
-    </div>
+      {/* <div className={styles.btn}>등록</div> */}
+    </>
   );
 };
 
