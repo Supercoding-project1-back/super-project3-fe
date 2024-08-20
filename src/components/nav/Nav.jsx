@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Nav.module.scss';
-import IconField from '../core/icon-field/IconField';
+import { Icon } from '../core';
 import { useNavigate } from 'react-router';
 
 const Nav = () => {
@@ -22,18 +22,24 @@ const Nav = () => {
     <nav>
       <ul>
         <li onClick={handleClickLogo}>
-          <IconField
-            type={'iconHome'}
-            className={`${styles.icon} ${styles.iconHome}`}
+          <Icon
+            type={'IconHome'}
+            className={styles.icon}
           />
           <span className={styles.title}>홈</span>
         </li>
         <li onClick={handleClickChat}>
-          <IconField type={'iconChat'} className={`${styles.icon} ${styles.iconChat}`} />
+          <Icon
+            type={'IconChat'}
+            className={styles.icon}
+          />
           <span className={styles.title}>채팅</span>
         </li>
         <li onClick={handleClickProfile}>
-          <IconField type={'iconUser'} className={`${styles.icon} ${styles.iconUser}`} />
+          <Icon
+            type={'IconUser'}
+            className={styles.icon}
+          />
           <span className={styles.title}>내정보</span>
         </li>
       </ul>

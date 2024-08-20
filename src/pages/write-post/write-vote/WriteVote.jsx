@@ -54,7 +54,7 @@ const WriteVote = () => {
                 <div className={styles.iconWrap}>
                   {voteItem.delete && (
                     <Icon
-                      type={'iconDelete'}
+                      type={'IconDelete'}
                       className={styles.icon}
                       onClick={() => handleRemoveVoteItem(voteItem.id)}
                     />

@@ -49,8 +49,8 @@ const CommentInput = ({ addComment, editComment, initialText }) => {
         onClick={handleSubmitComment}
       >
         <Icon
-          type={'iconSend'}
-          className={`${styles.icon} ${styles.iconSend}`}
+          type={'IconSend'}
+          className={styles.icon}
         />
       </div>
     </div>

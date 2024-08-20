@@ -7,10 +7,6 @@
   align-items: center;
   padding: 1rem;
   background-color: $color-lightGray;
-
-  .icon {
-    width: 2.5rem;
-  }
 }
 
 .header.mainHeader {
@@ -20,10 +16,6 @@
     align-items: center;
     font-weight: bold;
     font-size: $font-size-lg;
-
-    .iconLocation {
-      width: 1.8rem;
-    }
   }
 }
 
@@ -31,7 +23,8 @@
 .writeHeader,
 .chatHeader {
   .iconBack {
-    height: 1.8rem;
+    width: 2rem;
+    height: 2rem;
   }
 }
 

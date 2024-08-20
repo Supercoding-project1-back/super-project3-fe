@@ -29,15 +29,15 @@ const WritePost = () => {
       <section className={`${styles.wrap} ${styles.buttonsWrap}`}>
         <ul>
           <li>
-            <Icon type={'iconImage'} className={styles.icon} />
+            <Icon type={'IconImage'} className={styles.icon} />
             <span>사진</span>
           </li>
           <li>
-            <Icon type={'iconLocation'} className={styles.icon} />
+            <Icon type={'IconLocation'} className={styles.icon} />
             <span>위치</span>
           </li>
           <li onClick={openModalHandler}>
-            <Icon type={'iconVote'} className={styles.icon} />
+            <Icon type={'IconVote'} className={styles.icon} />
             <span>투표</span>
           </li>
         </ul>

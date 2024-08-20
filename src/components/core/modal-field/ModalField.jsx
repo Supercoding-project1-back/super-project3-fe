@@ -48,7 +48,7 @@ const ModalField = ({ open, onClose, children, variant, customClass }) => {
         <div className={styles.ModalContainer}>
           {variant !== "popupModal" && (
             <div className={styles.CloseButtonContainer} onClick={onClose} >
-              <Icon type={'iconClose'} className={styles.icon} />
+              <Icon type={'IconClose'} className={styles.icon} />
             </div>
           )}
           {children}
