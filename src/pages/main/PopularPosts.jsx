@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { ButtonField as Button } from "../../components/core/button-field";
 import styles from "./PopularPosts.module.scss";
-import { getAllPosts } from "../../api/test";
+import { getPostsByCategory } from "../../api/apiUtils";
 
-const PopularPosts = () => {
+const PopularPosts = ({ selectedCategory }) => {
   const [popularPosts, setPopularPosts] = useState([]);
 
   useEffect(() => {
     const fetchPopularPosts = async () => {
       try {
-        const posts = await getAllPosts({ page: 1, size: 10 });
+        const postsData = await getPostsByCategory(
+          selectedCategory,
+          0,
+          10,
+          "views,desc"
+        );
+        const posts = postsData.content;
 
         if (posts && posts.length > 0) {
-          // 조회수가 높은 순서로 정렬하여 상위 3개의 게시글만 게시
-          const sortedPosts = posts
-            .sort((a, b) => b.views - a.views)
-            .slice(0, 3);
+          const sortedPosts = posts.slice(0, 3); // 상위 3개의 게시글만 표시
           setPopularPosts(sortedPosts);
         }
       } catch (error) {
-        console.error("인기글 조회를 실패했습니다.", error);
+        console.error(
+          "인기글 조회를 실패했습니다.",
+          error.response?.data || error.message
+        );
       }
     };
 
     fetchPopularPosts();
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <div className={styles.popularPosts}>

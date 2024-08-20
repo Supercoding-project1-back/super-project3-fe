@@ -3,18 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "react-query";
 import { useInView } from "react-intersection-observer";
 import styles from "./PostList.module.scss";
-import { getPosts } from "../../api/test";
+import { getPostsByCategory } from "../../api/apiUtils";
 
 const PostList = ({ selectedCategory }) => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery("posts", ({ pageParam = 0 }) => getPosts({ pageParam }), {
-      getNextPageParam: (lastPage, pages) => {
-        return lastPage.totalPages > pages.length ? pages.length : undefined;
-      },
-    });
+    useInfiniteQuery(
+      ["posts", selectedCategory],
+      ({ pageParam = 0 }) => getPostsByCategory(selectedCategory, pageParam),
+      {
+        getNextPageParam: (lastPage, pages) => {
+          return lastPage.totalPages > pages.length ? pages.length : undefined;
+        },
+      }
+    );
 
   const { ref, inView } = useInView();
 
@@ -47,7 +51,7 @@ const PostList = ({ selectedCategory }) => {
                 {post.title}
               </h3>
               <div className={styles.postDetails}>
-                <p className={styles.nickname}>{post.nickname}</p>
+                <p className={styles.nickname}>{post.email}</p>
                 <p className={styles.postDate}>
                   작성일 {new Date(post.create_at).toLocaleDateString()}
                 </p>
@@ -57,9 +61,9 @@ const PostList = ({ selectedCategory }) => {
                   ? `${post.content.substring(0, 40)}...`
                   : post.content}
               </p>
-              {post.img && (
+              {post.postDetailResponse?.image1 && (
                 <img
-                  src={post.img}
+                  src={`${process.env.REACT_APP_API_BASE_URL}/${post.postDetailResponse.image1}`}
                   alt={post.title}
                   className={styles.postImg}
                 />
