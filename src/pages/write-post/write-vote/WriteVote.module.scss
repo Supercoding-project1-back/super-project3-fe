@@ -2,8 +2,6 @@
 
 
 .voteWrap {
-  // border: 1px solid red;
-
   ul.voteInputWrap {
     li {
       border-bottom: 1px solid $color-lightGray;
@@ -26,7 +24,8 @@
         align-items: center;
 
         .icon {
-          width: 2rem;
+          width: 1.8rem;
+          height: 1.8rem;
         }
       }
     }

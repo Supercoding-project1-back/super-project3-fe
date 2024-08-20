@@ -7,13 +7,19 @@ const IconField = ({
   className = '',
   onClick = () => { }
 }) => {
-  const iconType = icons[type];
-  // console.log(iconType);
+  const IconComponent = icons[type];
+
+  // 아이콘 type 에러처리
+  if (!IconComponent) {
+    console.error(`아이콘 type: ${type}이 존재하지 않습니다.`);
+    return null;
+  }
+
   return (
     <div className={styles.wrap} onClick={onClick}>
-      <img src={iconType} className={className} alt={type} />
+      <IconComponent className={`${styles.icon} ${className}`} />
     </div>
   );
-}
+};
 
 export default IconField;

@@ -39,29 +39,30 @@ const CommentField = () => {
 
   return (
     <div className={styles.wrap}>
-      <div>
-        댓글
-        <span>{comments.length}</span>
+      <div className={styles.conmmentCount}>
+        댓글 {comments.length}
       </div>
 
-      {comments.length > 0 ? (
-        <CommentList
-          comments={comments}
-          onEditClick={(id, text) => setIsEditing({ id, text })}
-          deleteComment={deleteComment}
-        />
-      ) : (
-        <div className={styles.noCommentMsg}>
-          <p>아직 댓글이 없어요! 첫 대글을 남겨보세요</p>
-        </div>
-      )}
+      {
+        comments.length > 0 ? (
+          <CommentList
+            comments={comments}
+            onEditClick={(id, text) => setIsEditing({ id, text })}
+            deleteComment={deleteComment}
+          />
+        ) : (
+          <div className={styles.noCommentMsg}>
+            <p>아직 댓글이 없어요! 첫 대글을 남겨보세요</p>
+          </div>
+        )
+      }
 
       <CommentInput
         addComment={handleCommentInputSubmit}
         editComment={isEditing ? handleCommentInputSubmit : null}
         initialText={isEditing?.text || ''}
       />
-    </div>
+    </div >
   );
 };
 

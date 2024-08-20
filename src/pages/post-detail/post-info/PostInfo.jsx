@@ -6,22 +6,22 @@ const PostInfo = () => {
   return (
     <>
       <Icon
-        type={'iconUserCircle'}
-        className={`${styles.iconUserCircle}`}
+        type={'IconUserCircle'}
+        className={styles.iconUserCircle}
       />
       <div>
         <div className={styles.nickname}>에어컨없인못살아</div>
         <div className={styles.details}>
-          <div className={`${styles.detailInfos} timeInfo`}>
+          <div className={styles.detailInfos}>
             <Icon
-              type={'iconTime'}
+              type={'IconTime'}
               className={styles.iconTime}
             />
             <span>6분전</span>
           </div>
-          <div className={`${styles.detailInfos} viewsInfo`}>
+          <div className={styles.detailInfos}>
             <Icon
-              type={'iconViews'}
+              type={'IconViews'}
               className={styles.iconViews}
             />
             <span>10</span>

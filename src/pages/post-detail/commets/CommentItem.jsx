@@ -11,11 +11,8 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
 
   return (
     <div className={styles.commentItem}>
-      <div className={styles.commentItemIcon}>
-        <Icon
-          type={'iconUserCircle'}
-          className={`${styles.iconUserCircle}`}
-        />
+      <div>
+        <Icon type={'IconUserCircle'} />
       </div>
       <div className={styles.commentItemContent}>
         <div className={styles.commentItemHeader}>
@@ -23,20 +20,20 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
           <div className={styles.iconWrap}>
             <div onClick={() => onEditClick(comment.id, comment.text)}>
               <Icon
-                type={'iconEdit'}
-                className={`${styles.icon} ${styles.iconEdit}`}
+                type={'IconEdit'}
+                className={styles.icon}
               />
             </div>
             <div onClick={handleDeleteClick}>
               <Icon
-                type={'iconDelete'}
-                className={`${styles.icon} ${styles.iconEdit}`}
+                type={'IconDelete'}
+                className={styles.icon}
               />
             </div>
             <div>
               <Icon
-                type={'iconChat'}
-                className={`${styles.icon} ${styles.iconChat}`}
+                type={'IconChat'}
+                className={styles.icon}
               />
             </div>
           </div>
