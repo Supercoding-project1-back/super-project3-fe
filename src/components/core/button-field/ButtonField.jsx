@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./ButtonField.module.scss";
 
-const Button = ({ label, onClick, isActive, type, className }) => {
+const Button = ({
+  className = '',
+  label,
+  onClick = () => { },
+  isActive,
+  type
+}) => {
   const buttonClass = isActive ? styles.active : styles.inactive;
 
   return (

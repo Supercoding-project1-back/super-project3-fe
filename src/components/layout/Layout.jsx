@@ -3,11 +3,13 @@ import { Header } from '../header';
 import { Nav } from '../nav';
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Layout.module.scss';
+import { PostFormProvider } from '../../contexts/PostFormContext';
 
 const Layout = () => {
   const location = useLocation();
   const path = location.pathname;
   // console.log(location.pathname);
+
 
   const renderHeader = () => {
     // 로그인/회원가입 헤더 : 없음
@@ -48,13 +50,15 @@ const Layout = () => {
 
   return (
     <>
-      <div className={styles.layoutContainer}>
-        {renderHeader()}
-        <div className={styles.contentsContainer}>
-          <Outlet />
+      <PostFormProvider>
+        <div className={styles.layoutContainer}>
+          {renderHeader()}
+          <div className={styles.contentsContainer}>
+            <Outlet />
+          </div>
+          {renderNav()}
         </div>
-        {renderNav()}
-      </div>
+      </PostFormProvider>
     </>
   );
 };

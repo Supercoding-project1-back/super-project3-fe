@@ -5,6 +5,7 @@ import App from "./App";
 import "./styles/fonts.scss";
 import "./styles/variables.scss";
 import "./styles/reset.scss";
+import "./styles/global.scss";
 
 const queryClient = new QueryClient();
 
