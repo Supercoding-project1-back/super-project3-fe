@@ -7,6 +7,7 @@ import { PostDetail } from "../pages/post-detail";
 import { WritePost } from "../pages/write-post";
 import { Chat, ChatDetail } from "../pages/chat";
 import Profile from "../pages/profile/Profile";
+import { KakaoRedirect } from "../pages/auth/login/KakaoRedirect";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const AppRoutes = createBrowserRouter([
       { path: "chat", element: <Chat /> },
       { path: "chat/:id", element: <ChatDetail /> },
       { path: "profile", element: <Profile /> },
+      { path: "auth/kakao/callback", element: <KakaoRedirect /> },
     ],
   },
 ]);

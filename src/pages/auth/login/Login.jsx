@@ -1,11 +1,11 @@
 import React from "react";
 import { ReactComponent as ChatIcon } from "../../../assets/imgs/homeLogo.svg";
 import styles from "./Login.module.scss";
-import kakaoLoginBtn from "../../../assets/imgs/kakaoLoginBtn.png"; // 이미지 파일을 임포트
+import kakaoLoginBtn from "../../../assets/imgs/kakaoLoginBtn.png";
 
-// 환경변수에서 REST API 키와 Redirect URI를 가져옵니다.
+// 인가코드 받기
 const K_REST_API_KEY = process.env.REACT_APP_K_REST_API_KEY;
-const K_REDIRECT_URI = process.env.REACT_APP_K_REDIRECT_URI; // .env에서 가져오기
+const K_REDIRECT_URI = process.env.REACT_APP_K_REDIRECT_URI;
 const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
 
 const Login = () => {
