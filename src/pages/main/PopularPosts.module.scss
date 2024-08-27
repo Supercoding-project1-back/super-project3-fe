@@ -2,47 +2,114 @@
 
 .popularPosts {
   margin-bottom: 20px;
+  background-color: $color-white;
+  border-radius: 8px;
+  font-family: $font-family-pretendard;
+  color: $color-black;
 
-  .popularButton {
-    background-color: $color-apricot;
-    color: $color-darkGray;
-    border: 1px solid $color-white;
-    pointer-events: none;
+  .popularHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .popularLabel {
+      background-color: $color-apricot;
+      color: $color-darkGray;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: $font-size-rg;
+    }
   }
 
-  ul {
+  .postList {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
 
   .postItem {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-  }
-
-  .postImage {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
-    object-fit: cover;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid $color-lightGray;
     border-radius: 8px;
-  }
+    background-color: $color-lightGray;
 
-  .postDetails {
-    display: flex;
-    flex-direction: column;
-  }
+    &:last-child {
+      margin-bottom: 0;
+    }
 
-  .postTitle {
-    font-size: 16px;
-    margin: 0;
-  }
+    .postLink {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+      font-family: $font-family-pretendard;
+    }
 
-  .postViews {
-    font-size: 14px;
-    color: #888;
+    .category {
+      background-color: $color-apricot;
+      color: $color-darkGray;
+      font-size: $font-size-md;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .postContent {
+      flex: 1;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+
+      .postTitle {
+        font-size: $font-size-md;
+        margin: 0;
+        font-weight: bold;
+        color: $color-darkGray;
+        margin-bottom: 5px;
+      }
+
+      .postDetails {
+        display: flex;
+        justify-content: space-between;
+        font-size: $font-size-sm;
+        color: $color-darkGray;
+
+        .postEmail {
+          flex-grow: 1;
+        }
+
+        .postDate {
+          margin-left: 10px;
+          white-space: nowrap;
+        }
+
+        .postViews {
+          margin-left: 10px;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .postImage {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      margin-left: 10px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }
