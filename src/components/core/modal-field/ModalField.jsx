@@ -47,8 +47,11 @@ const ModalField = ({ open, onClose, children, variant, customClass }) => {
         <div className={styles.ModalOverlay} onClick={onClose} />
         <div className={styles.ModalContainer}>
           {variant !== "popupModal" && (
-            <div className={styles.CloseButtonContainer} onClick={onClose} >
-              <Icon type={'IconClose'} className={styles.icon} />
+            <div className={styles.CloseButtonContainer} >
+              <Icon type={'IconClose'} className={styles.icon} onClick={onClose} />
+              {variant === "fullscreenModal" && (
+                <button className={styles.submitButton}>투표등록</button>
+              )}
             </div>
           )}
           {children}
