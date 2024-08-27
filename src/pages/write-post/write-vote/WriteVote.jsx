@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styles from './WriteVote.module.scss';
 import { Icon, InputTextField } from '../../../components/core';
 import { PostFormContext } from '../../../contexts/PostFormContext';

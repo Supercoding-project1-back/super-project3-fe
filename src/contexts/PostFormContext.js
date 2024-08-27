@@ -12,18 +12,37 @@ export const PostFormProvider = ({ children }) => {
     { id: Date.now(), text: '', votes: 0, delete: false },
     { id: Date.now() + 1, text: '', votes: 0, delete: false },
   ]);
+  const [uploadWriteVote, setUploadWriteVote] = useState([]);
 
+
+  // 글쓰기페이지에 투표 첨부
+  const addVoteToPost = () => {
+    setUploadWriteVote([...voteItems]);
+  }
+
+  // 글쓰기페이지에 첨부한 투표 삭제
+  const removeVoteToPost = () => {
+    setUploadWriteVote([]);
+    setVoteItems([
+      { id: Date.now(), text: '', votes: 0, delete: false },
+      { id: Date.now() + 1, text: '', votes: 0, delete: false },
+    ]);
+  }
+
+  // 작성한 게시글 등록
   const addPost = () => {
     const postData = {
       category,
       title,
       contents,
-      voteItems,
+      voteItems: uploadWriteVote,
     };
 
     console.log("게시글 데이터:", postData);
     // navigate('/');
   };
+
+
 
   // const addVoteItem = () => {
   //   if (voteItems.length < 4) {
@@ -55,6 +74,10 @@ export const PostFormProvider = ({ children }) => {
         setContents,
         voteItems,
         setVoteItems,
+        uploadWriteVote,
+        setUploadWriteVote,
+        addVoteToPost,
+        removeVoteToPost,
         addPost,
       }}
     >
