@@ -6,7 +6,7 @@ import { Login, SignUp } from "../pages/auth";
 import { PostDetail } from "../pages/post-detail";
 import { WritePost } from "../pages/write-post";
 import { Chat, ChatDetail } from "../pages/chat";
-import Profile from "../pages/profile/Profile";
+import { Profile } from "../pages/profile";
 
 const AppRoutes = createBrowserRouter([
   {
