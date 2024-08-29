@@ -1,27 +1,47 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Link 컴포넌트를 임포트
+import { Link } from "react-router-dom";
 import styles from "./PopularPosts.module.scss";
 import postImage from "../../assets/icons/icon-image.svg";
+import { Icon } from "../../components/core";
 
-const PopularPosts = () => {
+const PopularPosts = ({ selectedCategory }) => {
   const [popularPosts, setPopularPosts] = useState([]);
 
   const getPopularPosts = async () => {
     try {
-      const resp = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
-        {
-          params: {
-            page: 0,
-            size: 3, // 최대 3개의 게시글만 가져옴
-            sort: "views,desc", // 조회수 기준으로 내림차순 정렬
-          },
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`, // 헤더의 토큰을 환경 변수로 가져옴
-          },
-        }
-      );
+      let resp;
+      if (selectedCategory === "전체글") {
+        // 전체글에 대해 조회
+        resp = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
+          {
+            params: {
+              page: 0,
+              size: 3, // 최대 3개의 게시글만 가져옴
+              sort: "views,desc", // 조회수 기준으로 내림차순 정렬
+            },
+            headers: {
+              Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`, // 헤더의 토큰을 환경 변수로 가져옴
+            },
+          }
+        );
+      } else {
+        // 특정 카테고리에 대해 조회
+        resp = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts-by-category/${selectedCategory}`,
+          {
+            params: {
+              page: 0,
+              size: 3,
+              sort: "views,desc", // 조회수 기준으로 내림차순 정렬
+            },
+            headers: {
+              Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`,
+            },
+          }
+        );
+      }
 
       setPopularPosts(resp.data.content); // 인기 게시글 목록 설정
     } catch (error) {
@@ -30,8 +50,8 @@ const PopularPosts = () => {
   };
 
   useEffect(() => {
-    getPopularPosts(); // 컴포넌트 마운트 시 인기 게시글 조회
-  }, []);
+    getPopularPosts(); // 카테고리 변경 시 인기 게시글 조회
+  }, [selectedCategory]);
 
   return (
     <div className={styles.popularPosts}>
@@ -46,11 +66,17 @@ const PopularPosts = () => {
               <div className={styles.postContent}>
                 <h3 className={styles.postTitle}>{post.title}</h3>
                 <div className={styles.postDetails}>
-                  <span>{post.email}</span>
-                  <span className={styles.postDate}>
-                    {new Date(post.create_at).toLocaleDateString()}
-                  </span>
-                  <span className={styles.postViews}>조회수 {post.views}</span>
+                  <div className={styles.detailInfos}>
+                    <span>{post.email}</span>
+                    <Icon type={"IconTime"} className={styles.iconTime} />
+                    <span>
+                      {new Date(post.create_at).toLocaleDateString("ko-kr")}
+                    </span>
+                  </div>
+                  <div className={styles.detailInfos}>
+                    <Icon type={"IconViews"} className={styles.iconViews} />
+                    <span>{post.views}</span>
+                  </div>
                 </div>
               </div>
               <div className={styles.postImage}>

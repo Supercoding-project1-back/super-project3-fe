@@ -9,9 +9,9 @@
 
   .popularHeader {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin: 1rem 0rem 1rem 0rem;
 
     .popularLabel {
       background-color: $color-apricot;
@@ -69,10 +69,8 @@
 
       .postTitle {
         font-size: $font-size-md;
-        margin: 0;
         font-weight: bold;
         color: $color-darkGray;
-        margin-bottom: 5px;
       }
 
       .postDetails {
@@ -83,6 +81,7 @@
 
         .postEmail {
           flex-grow: 1;
+          font-size: $font-size-sm;
         }
 
         .postDate {
@@ -111,5 +110,20 @@
         object-fit: cover;
       }
     }
+  }
+}
+
+.detailInfos {
+  display: flex;
+  align-items: center;
+
+  .iconTime {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .iconViews {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }

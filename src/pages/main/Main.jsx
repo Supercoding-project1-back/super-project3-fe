@@ -4,7 +4,7 @@ import PopularPosts from "./PopularPosts";
 import PostList from "./PostList";
 
 const Main = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("전체글");
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -12,7 +12,10 @@ const Main = () => {
 
   return (
     <>
-      <CategoryFilter onCategoryChange={handleCategoryChange} />
+      <CategoryFilter
+        onCategoryChange={handleCategoryChange}
+        selectedCategory={selectedCategory}
+      />
       <PopularPosts selectedCategory={selectedCategory} />
       <PostList selectedCategory={selectedCategory} />
     </>
