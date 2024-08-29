@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './PostInfo.module.scss';
 import { Icon } from '../../../components/core';
 
-const PostInfo = () => {
+const PostInfo = ({ email, createAt, views }) => {
   return (
     <>
       <Icon
@@ -10,21 +10,21 @@ const PostInfo = () => {
         className={styles.iconUserCircle}
       />
       <div>
-        <div className={styles.nickname}>에어컨없인못살아</div>
+        <div className={styles.nickname}>{email}</div>
         <div className={styles.details}>
           <div className={styles.detailInfos}>
             <Icon
               type={'IconTime'}
               className={styles.iconTime}
             />
-            <span>6분전</span>
+            <span>{createAt}</span>
           </div>
           <div className={styles.detailInfos}>
             <Icon
               type={'IconViews'}
               className={styles.iconViews}
             />
-            <span>10</span>
+            <span>{views}</span>
           </div>
         </div>
       </div>

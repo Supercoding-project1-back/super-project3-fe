@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from '../../../components/core'
 
-const PostCategory = () => {
+const PostCategory = ({ category }) => {
   return (
     <>
       <Button
-        label={'일상'}
-        type={'일상'}
+        label={category}
+        type={category}
         isActive={true}
       />
     </>

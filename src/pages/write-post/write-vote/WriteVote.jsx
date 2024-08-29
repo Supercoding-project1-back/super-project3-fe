@@ -27,6 +27,7 @@ const WriteVote = () => {
     });
   }
 
+
   // 투표항목삭제
   const handleRemoveVoteItem = (id) => {
     const newVoteItems = voteItems.filter(voteItem => voteItem.id !== id);
@@ -41,24 +42,14 @@ const WriteVote = () => {
             return (
               <li key={voteItem.id}>
                 <div className={styles.inputWrap}>
-                  <input
-                    type='text'
-                    className={styles.voteInput}
-                    name={voteItem.id}
-                    value={voteItem.text}
-                    placeholder='항목을 입력해주세요'
-                    rows={1}
-                    onChange={(e) => handleChangeVoteItem(index, e.target.value)}
-                  />
-
-                  {/* <InputTextField
+                  <InputTextField
                     className={styles.voteInput}
                     name={voteItem.text}
                     value={voteItem.text}
                     placeholder='항목을 입력해주세요'
                     rows={1}
                     onChange={(name, value) => handleChangeVoteItem(index, value)}
-                  /> */}
+                  />
                 </div>
 
                 <div className={styles.iconWrap}>

@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './PostTtile.module.scss';
 
-const PostTitle = () => {
+const PostTitle = ({ title }) => {
   return (
     <>
-      <h1 className={styles.title}></h1>
+      <h1 className={styles.title}>{title}</h1>
     </>
   );
 };
