@@ -1,31 +1,25 @@
-import React, { useState } from "react";
-import { ButtonField as Button } from "../../components/core/button-field";
+import React from "react";
+import { Button } from "../../components/core/button-field";
 import styles from "./CategoryFilter.module.scss";
 
-const CategoryFilter = ({ onCategoryChange }) => {
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const categories = [
-    { label: "전체", type: "all" },
-    { label: "질문", type: "question" },
-    { label: "일상", type: "daily" },
-    { label: "구매", type: "purchase" },
-  ];
-
-  const handleCategoryClick = (type) => {
-    setActiveCategory(type);
-    onCategoryChange(type);
+const CategoryFilter = ({ selectedCategory, onCategoryChange }) => {
+  const categoryMapping = {
+    전체: "전체글",
+    질문: "질문글",
+    일상: "일상글",
+    구매: "구매글",
   };
 
   return (
-    <div className={styles.categoryFilter}>
-      {categories.map((category) => (
+    <div className={styles.categoryFilterContainer}>
+      {Object.keys(categoryMapping).map((label) => (
         <Button
-          key={category.type}
-          label={category.label}
-          type={category.type}
-          isActive={activeCategory === category.type}
-          onClick={() => handleCategoryClick(category.type)}
+          key={label}
+          label={label}
+          type={categoryMapping[label]}
+          onClick={() => onCategoryChange(categoryMapping[label])}
+          isActive={selectedCategory === categoryMapping[label]}
+          className={styles.categoryButton}
         />
       ))}
     </div>

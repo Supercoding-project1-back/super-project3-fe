@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 /* reset.scss 공통 요소 초기화 */
 %reset-common {
@@ -55,7 +55,14 @@ button {
 }
 
 /* 추가적인 요소 초기화 */
-body,
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 p,
 h1,
 h2,
