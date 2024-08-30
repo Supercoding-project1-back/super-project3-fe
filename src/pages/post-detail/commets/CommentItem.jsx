@@ -1,27 +1,45 @@
 import React from 'react';
 import styles from './CommentItem.module.scss';
-import IconField from '../../../components/core/icon-field/IconField';
+import { Icon } from '../../../components/core';
 
-const CommentItem = () => {
+const CommentItem = ({ comment, onEditClick, deleteComment }) => {
+  const handleDeleteClick = (event) => {
+    event.stopPropagation();
+    deleteComment(comment.id);
+    console.log('댓글삭제');
+  }
+
   return (
     <div className={styles.commentItem}>
-      <div className={styles.commentItemIcon}>
-        <IconField
-          type={'iconUserCircle'}
-          className={`${styles.iconUserCircle}`}
-        />
+      <div>
+        <Icon type={'IconUserCircle'} />
       </div>
       <div className={styles.commentItemContent}>
         <div className={styles.commentItemHeader}>
-          <div className={styles.nickname}>에어컨없인못살아</div>
-          <IconField
-            type={'iconMore'}
-            className={`${styles.iconMore}`}
-          />
+          <div className={styles.nickname}>{comment.author}</div>
+          <div className={styles.iconWrap}>
+            <div onClick={() => onEditClick(comment.id, comment.text)}>
+              <Icon
+                type={'IconEdit'}
+                className={styles.icon}
+              />
+            </div>
+            <div onClick={handleDeleteClick}>
+              <Icon
+                type={'IconDelete'}
+                className={styles.icon}
+              />
+            </div>
+            <div>
+              <Icon
+                type={'IconChat'}
+                className={styles.icon}
+              />
+            </div>
+          </div>
         </div>
         <div className={styles.commentText}>
-          댓글입니다~
-          댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~댓글입니다~
+          {comment.text}
         </div>
       </div>
     </div>

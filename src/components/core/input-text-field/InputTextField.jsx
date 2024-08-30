@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./InputTextField.module.scss";
 
 const InputTextField = ({
+  className = '',
   label = "",
   name,
   value: initialValue = "",
@@ -12,10 +13,15 @@ const InputTextField = ({
   onChange = () => { },
   onFocus = () => { },
   onBlur = () => { },
+  onKeyDown = () => { },
 }) => {
   const [value, setValue] = useState(initialValue);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {
@@ -38,8 +44,14 @@ const InputTextField = ({
     onBlur(name, e.target.value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onKeyDown(e);
+    }
+  };
+
   return (
-    <label className={styles.label}>
+    <label className={`${styles.label}`}>
       {label}
       <input
         id={`input_${name}`}
@@ -52,7 +64,8 @@ const InputTextField = ({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        className={styles.input}
+        onKeyDown={handleKeyDown}
+        className={`${styles.input} ${className}`}
       />
     </label>
   );
@@ -68,6 +81,7 @@ InputTextField.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 
 export default InputTextField;

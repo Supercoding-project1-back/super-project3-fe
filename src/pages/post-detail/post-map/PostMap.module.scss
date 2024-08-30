@@ -1,0 +1,29 @@
+@import '../../../styles/variables.scss';
+
+.mapWrap {
+  border: 2px solid $color-lightGray;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+
+  .mapContainer {
+    height: 200px; // 임의 지정
+  }
+
+  .locationText {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid $color-lightGray;
+    padding: 0.75rem;
+
+    .locationTitle {
+      font-size: $font-size-rg;
+      font-weight: bold;
+      padding-bottom: 0.35rem;
+    }
+
+    .locationAdress {
+      font-size: $font-size-sm;
+      color: $color-darkGray;
+    }
+  }
+}
