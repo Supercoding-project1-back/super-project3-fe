@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { areas } from "../data/area";
 import styles from "./AddInfo.module.scss";
-import axios from "axios";
+import { updateResidence } from "../../../api/authApi";
 
 const AddInfo = () => {
   const [selectedArea, setSelectedArea] = useState("");
@@ -10,12 +10,12 @@ const AddInfo = () => {
   const navigate = useNavigate();
 
   const handleAreaChange = (e) => {
-    setSelectedArea(String(e.target.value));
+    setSelectedArea(e.target.value);
     setSelectedSubArea(""); // 시/도를 변경하면 군/구 초기화
   };
 
   const handleSubAreaChange = (e) => {
-    setSelectedSubArea(String(e.target.value));
+    setSelectedSubArea(e.target.value);
   };
 
   const handleResidenceSubmit = async (e) => {
@@ -25,16 +25,7 @@ const AddInfo = () => {
     const residence = `${selectedArea} ${selectedSubArea}`;
 
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/auth/update-residence`,
-        { residence },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await updateResidence(token, residence);
       navigate("/");
     } catch (error) {
       if (error.isAxiosError) {
@@ -42,8 +33,6 @@ const AddInfo = () => {
           "주소지 정보 수정 실패",
           error.response?.data || error.message
         );
-      } else {
-        console.error("예상치 못한 에러 발생", error);
       }
     }
   };
