@@ -17,7 +17,8 @@ const Login = () => {
     <>
       <div className={styles.container}>
         <ChatIcon className={styles["svg-icon"]} />
-        <h1>지금 시작하세요</h1>
+        <h1>함께하는 자취생활,</h1>
+        <h1>간편하게 로그인 하세요</h1>
         <button onClick={handleKakaoLogin} className={styles.KakaoButton}>
           <img
             src={kakaoLoginBtn}
