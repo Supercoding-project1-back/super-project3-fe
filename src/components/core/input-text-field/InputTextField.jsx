@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./InputTextField.module.scss";
 
 const InputTextField = ({
+  className = '',
   label = "",
   name,
   value: initialValue = "",
@@ -50,7 +51,7 @@ const InputTextField = ({
   };
 
   return (
-    <label className={styles.label}>
+    <label className={`${styles.label}`}>
       {label}
       <input
         id={`input_${name}`}
@@ -64,7 +65,7 @@ const InputTextField = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
-        className={styles.input}
+        className={`${styles.input} ${className}`}
       />
     </label>
   );

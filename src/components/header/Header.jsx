@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Header.module.scss';
-import IconField from '../core/icon-field/IconField';
+import { Icon } from '../core';
 import { useNavigate } from 'react-router';
+import { PostFormContext } from '../../contexts/PostFormContext';
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
+
+  const { addPost } = useContext(PostFormContext);
+
 
   const handleClickBack = () => {
     if (window.history.length > 2) {
@@ -19,6 +23,7 @@ const Header = ({ type, location }) => {
     navigate('/');
   }
 
+
   const headerContent = () => {
     switch (type) {
       case 'main':
@@ -27,16 +32,10 @@ const Header = ({ type, location }) => {
           <header className={`${styles.header} ${styles.mainHeader}`}>
             <div className={styles.leftWrap}>
               <span>{location}</span>
-              <IconField
-                type={'iconLocation'}
-                className={`${styles.icon} ${styles.iconLocation}`}
-              />
+              <Icon type={'IconLocation'} />
             </div>
             <div className={styles.rightWrap}>
-              <IconField
-                type={'iconSearch'}
-                className={`${styles.icon} ${styles.iconSearch}`}
-              />
+              <Icon type={'IconSearch'} />
             </div>
           </header>
         );
@@ -50,16 +49,13 @@ const Header = ({ type, location }) => {
               className={styles.leftWrap}
               onClick={handleClickBack}
             >
-              <IconField
-                type={'iconBack'}
-                className={`${styles.icon} ${styles.iconBack}`}
+              <Icon
+                type={'IconBack'}
+                className={styles.iconBack}
               />
             </div>
             <div className={styles.rightWrap}>
-              <IconField
-                type={'iconMore'}
-                className={`${styles.icon} ${styles.iconMore}`}
-              />
+              <Icon type={'IconMore'} />
             </div>
           </header>
         );
@@ -73,13 +69,13 @@ const Header = ({ type, location }) => {
               className={styles.leftWrap}
               onClick={handleClickBack}
             >
-              <IconField
-                type={'iconBack'}
-                className={`${styles.icon} ${styles.iconBack}`}
+              <Icon
+                type={'IconBack'}
+                className={styles.iconBack}
               />
             </div>
             <div className={styles.rightWrap}>
-              <button>등록</button>
+              <button onClick={addPost}>등록</button>
             </div>
           </header>
         );
@@ -93,9 +89,9 @@ const Header = ({ type, location }) => {
               className={styles.leftWrap}
               onClick={handleClickBack}
             >
-              <IconField
-                type={'iconBack'}
-                className={`${styles.icon} ${styles.iconBack}`}
+              <Icon
+                type={'IconBack'}
+                className={styles.iconBack}
               />
             </div>
             <div>
@@ -113,16 +109,10 @@ const Header = ({ type, location }) => {
         return (
           <header className={styles.header}>
             <div className={styles.leftWrap} onClick={handleClickLogo}>
-              <IconField
-                type={'iconLogo'}
-                className={`${styles.icon} ${styles.iconLogo}`}
-              />
+              <Icon type={'IconLogo'} />
             </div>
             <div className={styles.rightWrap}>
-              <IconField
-                type={'iconSearch'}
-                className={`${styles.icon} ${styles.iconSearch}`}
-              />
+              <Icon type={'IconSearch'} />
             </div>
           </header>
         )

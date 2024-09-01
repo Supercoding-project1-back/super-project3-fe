@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.wrap {
+  // border: 1px solid red;
+  padding: 0.5rem;
+
+  &.buttonsWrap {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0rem -0.15rem 0.4rem 0rem $color-lightGray;
+
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.5rem;
+        padding: 0.5rem;
+        cursor: pointer;
+
+        .icon {
+          width: 1.4rem;
+          height: 1.4rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../../styles/variables.scss';
+
+
+.contentsWrap {
+  // min-height: 12.5rem;
+
+  .contents {
+    min-height: 12.5rem;
+    background: $color-white;
+    border: none;
+  }
+}
