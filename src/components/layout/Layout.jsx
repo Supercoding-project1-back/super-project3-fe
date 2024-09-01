@@ -4,6 +4,7 @@ import { Nav } from '../nav';
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Layout.module.scss';
 import { PostFormProvider } from '../../contexts/PostFormContext';
+import { UserProvider } from '../../contexts/UserContext'; 
 
 const Layout = () => {
   const location = useLocation();
@@ -19,7 +20,7 @@ const Layout = () => {
 
     // 메인페이지 헤더
     if (path === '/') {
-      return <Header type={'main'} location={'강남구'} />
+      return <Header type={'main'} location={'userLocation'} />
     }
 
     // 게시글상세페이지 헤더
@@ -51,6 +52,7 @@ const Layout = () => {
   return (
     <>
       <PostFormProvider>
+      <UserProvider>
         <div className={styles.layoutContainer}>
           {renderHeader()}
           <div className={styles.contentsContainer}>
@@ -58,6 +60,7 @@ const Layout = () => {
           </div>
           {renderNav()}
         </div>
+        </UserProvider>
       </PostFormProvider>
     </>
   );

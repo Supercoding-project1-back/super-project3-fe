@@ -3,12 +3,14 @@ import styles from './Header.module.scss';
 import { Icon } from '../core';
 import { useNavigate } from 'react-router';
 import { PostFormContext } from '../../contexts/PostFormContext';
+import { UserContext } from '../../contexts/UserContext'; 
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
 
   const { addPost } = useContext(PostFormContext);
+  const { userLocation } = useContext(UserContext); 
 
 
   const handleClickBack = () => {
@@ -31,7 +33,7 @@ const Header = ({ type, location }) => {
         return (
           <header className={`${styles.header} ${styles.mainHeader}`}>
             <div className={styles.leftWrap}>
-              <span>{location}</span>
+              <span>{userLocation}</span>
               <Icon type={'IconLocation'} />
             </div>
             <div className={styles.rightWrap}>
