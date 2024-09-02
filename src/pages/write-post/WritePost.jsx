@@ -29,11 +29,11 @@ const WritePost = () => {
         <WriteContents />
       </section>
 
-      {uploadWriteVote.length > 0 && (
+      {uploadWriteVote.length > 0 ? (
         <section className={styles.wrap}>
           <Vote items={uploadWriteVote} isReadOnly={true} onRemove={removeVoteToPost} />
         </section>
-      )}
+      ) : null}
 
 
       <section className={`${styles.wrap} ${styles.buttonsWrap}`}>

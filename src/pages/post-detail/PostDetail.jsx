@@ -81,7 +81,7 @@ const PostDetail = () => {
       </section>
 
       {/* 댓글 영역 */}
-      <CommentField />
+      <CommentField postId={post.id} />
     </>
   )
 };

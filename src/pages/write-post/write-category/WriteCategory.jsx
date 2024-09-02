@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { Button } from '../../../components/core'
 import { PostFormContext } from '../../../contexts/PostFormContext';
 
@@ -9,10 +9,10 @@ const WriteCategory = () => {
   const { setCategory } = useContext(PostFormContext);
   const categories = ['일상', '질문', '구매'];
 
-  const handleClickCategory = (category) => {
+  const handleClickCategory = useCallback((category) => {
     setActiveCategory(category);
     setCategory(category);
-  }
+  }, [setCategory])
 
   return (
     <>
