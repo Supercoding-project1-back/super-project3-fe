@@ -12,11 +12,11 @@ import { PostFormContext } from '../../contexts/PostFormContext';
 
 
 const WritePost = () => {
-  const { voteItems } = useContext(PostFormContext);
+  const { uploadWriteVote, removeVoteToPost } = useContext(PostFormContext);
   const { Modal, openModalHandler } = useModal(null);
 
   return (
-    <>
+    <div className={styles.container}>
       <section className={styles.wrap}>
         <WriteCategory />
       </section>
@@ -29,9 +29,11 @@ const WritePost = () => {
         <WriteContents />
       </section>
 
-      <section>
-        <Vote itmes={voteItems} isReadOnly={true} />
-      </section>
+      {uploadWriteVote.length > 0 ? (
+        <section className={styles.wrap}>
+          <Vote items={uploadWriteVote} isReadOnly={true} onRemove={removeVoteToPost} />
+        </section>
+      ) : null}
 
 
       <section className={`${styles.wrap} ${styles.buttonsWrap}`}>
@@ -57,7 +59,7 @@ const WritePost = () => {
         <WriteVote />
       </Modal>
 
-    </>
+    </div>
   );
 };
 

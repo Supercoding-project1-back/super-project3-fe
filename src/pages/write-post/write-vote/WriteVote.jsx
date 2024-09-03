@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import styles from './WriteVote.module.scss';
 import { Icon, InputTextField } from '../../../components/core';
 import { PostFormContext } from '../../../contexts/PostFormContext';
@@ -8,30 +8,32 @@ const WriteVote = () => {
 
 
   // 투표항목추가
-  const handleAddVoteItem = () => {
+  const handleAddVoteItem = useCallback(() => {
     if (voteItems.length < 4) {
-      setVoteItems([...voteItems, {
-        id: Date.now(),
-        text: '',
-        votes: 0,
-        delete: true
-      }]);
+      setVoteItems(prevVoteItems => [
+        ...prevVoteItems,
+        {
+          id: Date.now(),
+          text: '',
+          votes: 0,
+          delete: true
+        }
+      ]);
     }
-  }
+  }, [voteItems, setVoteItems]);
 
-  const handleChangeVoteItem = (index, value) => {
-    setVoteItems(prevVoteItems => {
-      const newVoteItems = [...prevVoteItems];
-      newVoteItems[index] = { ...newVoteItems[index], text: value };
-      return newVoteItems;
-    });
-  }
+
+  const handleChangeVoteItem = useCallback((id, value) => {
+    setVoteItems(prevVoteItems => prevVoteItems.map(item =>
+      item.id === id ? { ...item, text: value } : item
+    ));
+  }, [setVoteItems]);
+
 
   // 투표항목삭제
-  const handleRemoveVoteItem = (id) => {
-    const newVoteItems = voteItems.filter(voteItem => voteItem.id !== id);
-    setVoteItems(newVoteItems);
-  }
+  const handleRemoveVoteItem = useCallback((id) => {
+    setVoteItems(prevVoteItems => prevVoteItems.filter(voteItem => voteItem.id !== id));
+  }, [setVoteItems]);
 
   return (
     <>
@@ -41,28 +43,18 @@ const WriteVote = () => {
             return (
               <li key={voteItem.id}>
                 <div className={styles.inputWrap}>
-                  <input
-                    type='text'
-                    className={styles.voteInput}
-                    name={voteItem.id}
-                    value={voteItem.text}
-                    placeholder='항목을 입력해주세요'
-                    rows={1}
-                    onChange={(e) => handleChangeVoteItem(index, e.target.value)}
-                  />
-
-                  {/* <InputTextField
+                  <InputTextField
                     className={styles.voteInput}
                     name={voteItem.text}
                     value={voteItem.text}
                     placeholder='항목을 입력해주세요'
                     rows={1}
-                    onChange={(name, value) => handleChangeVoteItem(index, value)}
-                  /> */}
+                    onChange={(name, value) => handleChangeVoteItem(voteItem.id, value)}
+                  />
                 </div>
 
                 <div className={styles.iconWrap}>
-                  {voteItem.delete && (
+                  {voteItem.id > 2 && (
                     <Icon
                       type={'IconDelete'}
                       className={styles.icon}
@@ -85,5 +77,6 @@ const WriteVote = () => {
     </>
   );
 };
+
 
 export default WriteVote;

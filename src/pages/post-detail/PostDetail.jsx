@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './PostDetail.module.scss';
 import { CommentField } from './commets';
 import {
@@ -10,25 +10,59 @@ import {
   PostMap
 } from './';
 import ImgViewField from '../../components/core/img-view-field/ImgViewField';
+import { useParams } from 'react-router-dom';
+import { getPostById } from '../../api/post';
 
 const PostDetail = () => {
+  const { id } = useParams();
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const data = await getPostById(id);
+        setPost(data);
+        setLoading(false);
+      } catch (error) {
+        console.error(`게시글 로딩 중 오류 발생 : ${error}`);
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
+
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (!post) {
+    return <div>게시글을 불러오지 못했습니다.</div>;
+  }
+
   return (
     <>
       <section className={styles.wrap}>
-        <PostCategory />
+        <PostCategory category={post.category} />
       </section>
 
       <section className={styles.wrap}>
-        <PostTitle />
+        <PostTitle title={post.title} />
       </section>
 
       {/* 게시글 : 게시글정보 */}
       <section className={`${styles.wrap} ${styles.postInfo}`}>
-        <PostInfo />
+        <PostInfo
+          email={post.email}
+          createAt={post.create_at}
+          views={post.views}
+        />
       </section>
 
       <section className={styles.wrap}>
-        <PostContents />
+        <PostContents content={post.content} />
       </section>
 
       <section className={styles.wrap}>
@@ -47,9 +81,9 @@ const PostDetail = () => {
       </section>
 
       {/* 댓글 영역 */}
-      <CommentField />
+      <CommentField postId={post.id} />
     </>
-  );
+  )
 };
 
 export default PostDetail;

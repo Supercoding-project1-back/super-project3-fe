@@ -1,11 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Portal from "./Portal";
 import styles from "./ModalField.module.scss";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "..";
+import { PostFormContext } from "../../../contexts/PostFormContext";
 
 const ModalField = ({ open, onClose, children, variant, customClass }) => {
   const navigate = useNavigate();
+  const { addVoteToPost } = useContext(PostFormContext);
+
+  const handleRegisterVote = () => {
+    addVoteToPost();
+    onClose();
+  };
 
   useEffect(() => {
     if (open) {
@@ -50,7 +57,10 @@ const ModalField = ({ open, onClose, children, variant, customClass }) => {
             <div className={styles.CloseButtonContainer} >
               <Icon type={'IconClose'} className={styles.icon} onClick={onClose} />
               {variant === "fullscreenModal" && (
-                <button className={styles.submitButton}>투표등록</button>
+                <button
+                  className={styles.submitButton}
+                  onClick={handleRegisterVote}
+                >투표등록</button>
               )}
             </div>
           )}

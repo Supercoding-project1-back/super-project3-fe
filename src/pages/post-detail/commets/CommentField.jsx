@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styles from './CommentField.module.scss';
 import CommentList from './CommentList';
 import CommentInput from './CommentInput';
+import { createComment } from '../../../api/comment';
 
-const CommentField = () => {
+const CommentField = ({ postId }) => {
   // 댓글 상태 관리
   const [comments, setComments] = useState([]);
 
@@ -11,8 +12,13 @@ const CommentField = () => {
   const [isEditing, setIsEditing] = useState(null);
 
   // 댓글 추가
-  const addComment = (text) => {
-    setComments([...comments, { id: Date.now(), text, author: '댓글작성자' }]);
+  const addComment = async (text) => {
+    try {
+      const newComment = await createComment(postId, text);
+      setComments([...comments, { id: newComment.postId, text: newComment.content, author: '닉네임' }]);
+    } catch (error) {
+      console.error('댓글 생성 오류:', error);
+    }
   }
 
   // 댓글 수정

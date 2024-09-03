@@ -41,7 +41,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       // 게시글상세페이지 헤더 : 뒤로가기+(더보기-user에따라)
       case 'detail':
@@ -61,7 +60,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       // 글쓰기페이지 헤더 : 뒤로가기+등록
       case 'write':
@@ -81,7 +79,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       // 채팅방페이지 : 뒤로가기+닉네임
       case 'chat':
@@ -104,7 +101,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       default:
         // 기본 헤더 : 로고+검색
