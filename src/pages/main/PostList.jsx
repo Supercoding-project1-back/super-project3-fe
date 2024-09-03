@@ -14,11 +14,12 @@ const PostList = ({ selectedCategory }) => {
 
   const fetchPosts = async () => {
     try {
+      const token = localStorage.getItem("token");
       const resp = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -77,7 +78,7 @@ const PostList = ({ selectedCategory }) => {
                   </div>
                   <div className={styles.postDetails}>
                     <div className={styles.detailInfos}>
-                      <span>{post.email}</span>
+                      <span>{post.nickname}</span>
                       <Icon type={"IconTime"} className={styles.iconTime} />
                       <span>
                         {new Date(post.create_at).toLocaleDateString("ko-kr")}
@@ -103,7 +104,7 @@ const PostList = ({ selectedCategory }) => {
                   </div>
                   <div className={styles.postDetails}>
                     <div className={styles.detailInfos}>
-                      <span>{post.email}</span>
+                      <span>{post.nickname}</span>
                       <Icon type={"IconTime"} className={styles.iconTime} />
                       <span>
                         {new Date(post.create_at).toLocaleDateString("ko-kr")}

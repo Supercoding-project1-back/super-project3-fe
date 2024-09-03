@@ -76,14 +76,8 @@
       .postDetails {
         display: flex;
         justify-content: space-between;
-        font-size: $font-size-sm;
+        font-size: $font-size-md;
         color: $color-darkGray;
-
-        .postEmail {
-          flex-grow: 1;
-          font-size: $font-size-sm;
-        }
-
         .postDate {
           margin-left: 10px;
           white-space: nowrap;

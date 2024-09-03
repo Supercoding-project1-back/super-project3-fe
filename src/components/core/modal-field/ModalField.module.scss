@@ -60,7 +60,11 @@
   }
 
   .CloseButtonContainer {
-    justify-content: flex-start;
+    justify-content: space-between;
+
+    .submitButton {
+      font-size: $font-size-lg;
+    }
   }
 }
 

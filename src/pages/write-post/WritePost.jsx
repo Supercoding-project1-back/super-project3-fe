@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './WritePost.module.scss';
-import { WriteCategory, WriteTitle, WriteContents, WriteVote } from './';
-import { Icon } from '../../components/core';
+import {
+  WriteCategory,
+  WriteTitle,
+  WriteContents,
+  WriteVote
+} from './';
+import { Icon, Vote } from '../../components/core';
 import useModal from '../../hooks/useModal';
+import { PostFormContext } from '../../contexts/PostFormContext';
 
 
 const WritePost = () => {
+  const { uploadWriteVote, removeVoteToPost } = useContext(PostFormContext);
   const { Modal, openModalHandler } = useModal(null);
 
   return (
-    <>
+    <div className={styles.container}>
       <section className={styles.wrap}>
         <WriteCategory />
       </section>
@@ -22,9 +29,12 @@ const WritePost = () => {
         <WriteContents />
       </section>
 
-      <Modal variant="fullscreenModal" customClass={styles.voteModal}>
-        <WriteVote />
-      </Modal>
+      {uploadWriteVote.length > 0 ? (
+        <section className={styles.wrap}>
+          <Vote items={uploadWriteVote} isReadOnly={true} onRemove={removeVoteToPost} />
+        </section>
+      ) : null}
+
 
       <section className={`${styles.wrap} ${styles.buttonsWrap}`}>
         <ul>
@@ -42,7 +52,14 @@ const WritePost = () => {
           </li>
         </ul>
       </section>
-    </>
+
+
+      {/* 투표버튼 클릭 시, 투표 모달 창 생성 */}
+      <Modal variant="fullscreenModal" customClass={styles.voteModal}>
+        <WriteVote />
+      </Modal>
+
+    </div>
   );
 };
 

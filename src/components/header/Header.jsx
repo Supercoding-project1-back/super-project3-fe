@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
-import styles from "./Header.module.scss";
-import { Icon } from "../core";
-import { useNavigate } from "react-router";
-import { PostFormContext } from "../../contexts/PostFormContext";
+import React, { useContext } from 'react';
+import styles from './Header.module.scss';
+import { Icon } from '../core';
+import { useNavigate } from 'react-router';
+import { PostFormContext } from '../../contexts/PostFormContext';
+import { UserContext } from '../../contexts/UserContext'; 
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
   const { addPost } = useContext(PostFormContext);
+  const { userLocation } = useContext(UserContext); 
 
   const handleClickBack = () => {
     if (window.history.length > 2) {
@@ -28,15 +30,14 @@ const Header = ({ type, location }) => {
         return (
           <header className={`${styles.header} ${styles.mainHeader}`}>
             <div className={styles.leftWrap}>
-              <span>{location}</span>
-              <Icon type={"IconLocation"} />
+              <span>{userLocation}</span>
+              <Icon type={'IconLocation'} />
             </div>
             <div className={styles.rightWrap}>
               <Icon type={"IconSearch"} />
             </div>
           </header>
         );
-        break;
 
       case "detail":
         return (
@@ -49,7 +50,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       // 글쓰기페이지 헤더 : 뒤로가기+등록
       case "write":
@@ -63,7 +63,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       // 채팅방페이지 : 뒤로가기+닉네임
       case "chat":
@@ -78,7 +77,6 @@ const Header = ({ type, location }) => {
             <div className={styles.rightWrap}>{null}</div>
           </header>
         );
-        break;
 
       // 프로필페이지 : 메뉴텍스트 + 검색
       case "profile":
@@ -92,7 +90,6 @@ const Header = ({ type, location }) => {
             </div>
           </header>
         );
-        break;
 
       default:
         // 기본 헤더 : 로고+검색

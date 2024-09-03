@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ModalField from "../components/core/modal-field/ModalField";
 
 const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModalHandler = () => setIsModalOpen(true);
-  const closeModalHandler = () => setIsModalOpen(false);
+  const openModalHandler = useCallback(() => setIsModalOpen(true), []);
+  const closeModalHandler = useCallback(() => setIsModalOpen(false), []);
 
-  const Modal = ({ children, variant, customClass }) => (
+  const Modal = useCallback(({ children, variant, customClass }) => (
     <ModalField
       open={isModalOpen}
       onClose={closeModalHandler}
@@ -16,7 +16,7 @@ const useModal = () => {
     >
       {children}
     </ModalField>
-  );
+  ), [isModalOpen, closeModalHandler]);
 
   return { Modal, openModalHandler, closeModalHandler };
 };
