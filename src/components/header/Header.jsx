@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import styles from './Header.module.scss';
-import { Icon } from '../core';
-import { useNavigate } from 'react-router';
-import { PostFormContext } from '../../contexts/PostFormContext';
-import { UserContext } from '../../contexts/UserContext'; 
+import React, { useContext } from "react";
+import styles from "./Header.module.scss";
+import { Icon } from "../core";
+import { useNavigate } from "react-router";
+import { PostFormContext } from "../../contexts/PostFormContext";
+import { UserContext } from "../../contexts/UserContext";
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
   const { addPost } = useContext(PostFormContext);
-  const { userLocation } = useContext(UserContext); 
+  const { userLocation } = useContext(UserContext);
 
   const handleClickBack = () => {
     if (window.history.length > 2) {
@@ -31,7 +31,7 @@ const Header = ({ type, location }) => {
           <header className={`${styles.header} ${styles.mainHeader}`}>
             <div className={styles.leftWrap}>
               <span>{userLocation}</span>
-              <Icon type={'IconLocation'} />
+              <Icon type={"IconLocation"} />
             </div>
             <div className={styles.rightWrap}>
               <Icon type={"IconSearch"} />

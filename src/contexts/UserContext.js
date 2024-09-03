@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import fetchUserLocation from "../api/userApi";
+import fetchUserLocation from "../api/userLocationApi";
 
 // UserContext 생성
 export const UserContext = createContext();

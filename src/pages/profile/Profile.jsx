@@ -1,21 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import fetchUserData from "../../api/userApi";
 import ImgViewField from "../../components/core/img-view-field/ImgViewField";
 import Button from "../../components/core/button-field/ButtonField";
 import styles from "./Profile.module.scss";
 
 const Profile = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const data = await fetchUserData();
+      setUserData(data);
+    };
+
+    getUserData();
+  }, []);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.profileContainer}>
       <section className={styles.profileSection}>
         <ImgViewField
-          src="https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/944/eabb97e854d5e5927a69d311701cc211_res.jpeg"
+          src={userData.profilePicture}
           alt="프로필 이미지"
           className={styles.profileImage}
         />
         <div className={styles.profileInfo}>
-          <h3>커뮤낭인님</h3>
-          <p>서울시 서초구</p>
-          <p>자기소개입니다.</p>
+          <div className={styles.nicknameInfo}>
+            <h3>{userData.nickname}</h3>
+          </div>
+          <div className={styles.residenceInfo}>
+            <p>{userData.residence}</p>
+          </div>
+          <h4>자기소개</h4>
+          <p>{userData.introduction}</p>
           <Button label="수정하기" onClick={() => {}} isActive={true} />
         </div>
       </section>
