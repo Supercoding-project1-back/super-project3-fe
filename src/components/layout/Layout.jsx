@@ -11,18 +11,18 @@ const Layout = () => {
   // console.log(location.pathname);
 
   const renderHeader = () => {
-    // 로그인/회원가입 헤더 : 없음
-    if (path === "/login" || path === "/signup") {
+    // 로그인/회원가입 주소정보 추가 헤더 : 없음
+    if (path === "/login" || path === "/addinfo") {
       return null;
     }
 
     // 메인페이지 헤더
     if (path === "/") {
-      return <Header type="main" location="강남구" />;
+      return <Header type={"main"} location={"강남구"} />;
     }
     // 게시글상세페이지 헤더
     if (path.startsWith("/post/") && path !== "/post/new") {
-      return <Header type="detail" />;
+      return <Header type={"detail"} />;
     }
 
     // 글쓰기페이지 헤더
@@ -44,6 +44,10 @@ const Layout = () => {
 
   const renderNav = () => {
     if (path.startsWith("/post")) {
+      return null;
+    }
+    // 로그인/회원가입 주소정보 추가 nav : 없음
+    if (path === "/login" || path === "/addinfo") {
       return null;
     }
     return <Nav />;

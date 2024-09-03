@@ -1,0 +1,74 @@
+@import "../../../styles/variables.scss";
+
+.addInfocontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.addInfotitle {
+  font-size: $font-size-xl;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: $color-black;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.addInfosubtitle {
+  font-size: $font-size-lg;
+  color: $color-darkGray;
+  margin-bottom: 3rem;
+}
+
+form {
+  align-items: center;
+  border-radius: 1rem;
+  width: 300px;
+  align-items: center;
+}
+
+label {
+  font-size: $font-size-lg;
+  color: $color-black;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+select {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  color: $color-black;
+  background-color: $color-lightGray;
+  font-weight: lighter;
+  font-size: $font-size-md;
+  margin-top: 0.5rem;
+}
+
+select option {
+  color: $color-black;
+  background-color: $color-lightGray;
+  font-size: $font-size-md;
+}
+
+.addinfoButton {
+  width: 100%;
+  padding: 10px;
+  background-color: $color-green;
+  color: $color-white;
+  font-size: $font-size-md;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: lighten($color-green, 5%);
+  }
+}
