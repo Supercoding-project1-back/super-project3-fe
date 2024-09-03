@@ -77,7 +77,7 @@ const PostList = ({ selectedCategory }) => {
                   </div>
                   <div className={styles.postDetails}>
                     <div className={styles.detailInfos}>
-                      <span>{post.email}</span>
+                      <span>{post.nickname}</span>
                       <Icon type={"IconTime"} className={styles.iconTime} />
                       <span>
                         {new Date(post.create_at).toLocaleDateString("ko-kr")}
@@ -103,7 +103,7 @@ const PostList = ({ selectedCategory }) => {
                   </div>
                   <div className={styles.postDetails}>
                     <div className={styles.detailInfos}>
-                      <span>{post.email}</span>
+                      <span>{post.nickname}</span>
                       <Icon type={"IconTime"} className={styles.iconTime} />
                       <span>
                         {new Date(post.create_at).toLocaleDateString("ko-kr")}

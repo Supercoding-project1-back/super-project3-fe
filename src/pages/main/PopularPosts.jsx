@@ -67,7 +67,7 @@ const PopularPosts = ({ selectedCategory }) => {
                 <h3 className={styles.postTitle}>{post.title}</h3>
                 <div className={styles.postDetails}>
                   <div className={styles.detailInfos}>
-                    <span>{post.email}</span>
+                    <span>{post.nickname}</span>
                     <Icon type={"IconTime"} className={styles.iconTime} />
                     <span>
                       {new Date(post.create_at).toLocaleDateString("ko-kr")}
