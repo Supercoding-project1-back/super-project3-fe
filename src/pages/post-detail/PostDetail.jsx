@@ -9,6 +9,7 @@ import {
   PostVote,
   PostMap
 } from './';
+import ImgViewField from '../../components/core/img-view-field/ImgViewField';
 
 const PostDetail = () => {
   return (
@@ -28,6 +29,13 @@ const PostDetail = () => {
 
       <section className={styles.wrap}>
         <PostContents />
+      </section>
+
+      <section className={styles.wrap}>
+        <ImgViewField src="https://cafe24img.poxo.com/dinotaeng/web/product/small/202205/b7bb570a94d0732787fc2110ec4bbe6c.png"
+          alt="Example Image"
+          className={styles.img}
+          onErrorSrc="https://example.com/fallback-image.svg" />
       </section>
 
       <section className={styles.wrap}>
