@@ -8,48 +8,48 @@ import { Icon } from "../../components/core";
 const PopularPosts = ({ selectedCategory }) => {
   const [popularPosts, setPopularPosts] = useState([]);
 
-  const getPopularPosts = async () => {
-    try {
-      let resp;
-      if (selectedCategory === "전체글") {
-        // 전체글에 대해 조회
-        resp = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
-          {
-            params: {
-              page: 0,
-              size: 3, // 최대 3개의 게시글만 가져옴
-              sort: "views,desc", // 조회수 기준으로 내림차순 정렬
-            },
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`, // 헤더의 토큰을 환경 변수로 가져옴
-            },
-          }
-        );
-      } else {
-        // 특정 카테고리에 대해 조회
-        resp = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts-by-category/${selectedCategory}`,
-          {
-            params: {
-              page: 0,
-              size: 3,
-              sort: "views,desc", // 조회수 기준으로 내림차순 정렬
-            },
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`,
-            },
-          }
-        );
-      }
-
-      setPopularPosts(resp.data.content); // 인기 게시글 목록 설정
-    } catch (error) {
-      console.error("Error fetching popular posts:", error);
-    }
-  };
-
   useEffect(() => {
+    const getPopularPosts = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        let resp;
+        if (selectedCategory === "전체글") {
+          // 전체글에 대해 조회
+          resp = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
+            {
+              params: {
+                page: 0,
+                size: 3, // 최대 3개의 게시글만 가져옴
+                sort: "views,desc", // 조회수 기준으로 내림차순 정렬
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+        } else {
+          // 특정 카테고리에 대해 조회
+          resp = await axios.get(
+            `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts-by-category/${selectedCategory}`,
+            {
+              params: {
+                page: 0,
+                size: 3,
+                sort: "views,desc", // 조회수 기준으로 내림차순 정렬
+              },
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+        }
+
+        setPopularPosts(resp.data.content); // 인기 게시글 목록 설정
+      } catch (error) {
+        console.error("Error fetching popular posts:", error);
+      }
+    };
     getPopularPosts(); // 카테고리 변경 시 인기 게시글 조회
   }, [selectedCategory]);
 

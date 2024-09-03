@@ -14,11 +14,12 @@ const PostList = ({ selectedCategory }) => {
 
   const fetchPosts = async () => {
     try {
+      const token = localStorage.getItem("token");
       const resp = await axios.get(
         `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_K_REST_API_KEY}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
