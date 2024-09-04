@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CommentField.module.scss';
 import CommentList from './CommentList';
 import CommentInput from './CommentInput';
-import { createComment } from '../../../api/comment';
+import { createComment, deleteCommentApi, getCommentList, modifyComment } from '../../../api/comment';
 
 const CommentField = ({ postId }) => {
   // 댓글 상태 관리
@@ -11,33 +11,73 @@ const CommentField = ({ postId }) => {
   // 댓글 수정 상태
   const [isEditing, setIsEditing] = useState(null);
 
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(4);
+
+
+  // 댓글리스트 가져오기
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const commentListData = await getCommentList(postId, page, size);
+        setComments(commentListData.content);
+      } catch (error) {
+        console.error('댓글 목록 로딩 오류:', error);
+      }
+    };
+
+    if (postId) {
+      fetchComments();
+    }
+  }, [postId, page, size]);
+
+
   // 댓글 추가
   const addComment = async (text) => {
     try {
       const newComment = await createComment(postId, text);
-      setComments([...comments, { id: newComment.postId, text: newComment.content, author: '닉네임' }]);
+      setComments((prevComments) => [
+        ...prevComments,
+        {
+          commentId: newComment.commentId,
+          text: newComment.content,
+          nickname: newComment.nickname,
+        },
+      ]);
     } catch (error) {
       console.error('댓글 생성 오류:', error);
     }
   }
 
+
   // 댓글 수정
-  const editComment = (id, newText) => {
-    setComments(comments.map((comment) =>
-      comment.id === id ? { ...comment, text: newText } : comment
-    ));
-    setIsEditing(null);  // 수정모드 종료
+  const editComment = async (commentId, newText) => {
+    try {
+      const updatedComment = await modifyComment(commentId, postId, newText);
+      setComments(comments.map((comment) =>
+        comment.commentId === commentId ? { ...comment, text: updatedComment.content } : comment
+      ));
+      setIsEditing(null); // 수정모드 종료
+    } catch (error) {
+      console.error("댓글 수정 오류:", error);
+    }
   }
 
+
   // 댓글 삭제
-  const deleteComment = (id) => {
-    setComments(comments.filter(comment => comment.id !== id));
-  }
+  const deleteComment = async (commentId) => {
+    try {
+      await deleteCommentApi(commentId);
+      setComments(comments.filter(comment => comment.commentId !== commentId));
+    } catch (error) {
+      console.error("댓글 삭제 오류:", error);
+    }
+  };
 
   // 댓글 입력창 제출 버튼 클릭 시, 조건에 따라 호출
   const handleCommentInputSubmit = (text) => {
     if (isEditing) {
-      editComment(isEditing.id, text);
+      editComment(isEditing.commentId, text);
     } else {
       addComment(text);
     }
@@ -53,7 +93,7 @@ const CommentField = ({ postId }) => {
         comments.length > 0 ? (
           <CommentList
             comments={comments}
-            onEditClick={(id, text) => setIsEditing({ id, text })}
+            onEditClick={(commentId, text) => setIsEditing({ commentId, text })}
             deleteComment={deleteComment}
           />
         ) : (

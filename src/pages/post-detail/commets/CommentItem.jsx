@@ -5,20 +5,29 @@ import { Icon } from '../../../components/core';
 const CommentItem = ({ comment, onEditClick, deleteComment }) => {
   const handleDeleteClick = (event) => {
     event.stopPropagation();
-    deleteComment(comment.id);
+    deleteComment(comment.commentId);
     console.log('댓글삭제');
   }
 
   return (
     <div className={styles.commentItem}>
-      <div>
-        <Icon type={'IconUserCircle'} />
+      <div className={styles.userProfile}>
+        {comment.profilePicture ? (
+          <div className={styles.profilePicture}>
+            <img
+              src={comment.profilePicture}
+              alt={comment.nickname}
+            />
+          </div>
+        ) : (
+          <Icon type={'IconUserCircle'} className={styles.iconUserCircle} />
+        )}
       </div>
       <div className={styles.commentItemContent}>
         <div className={styles.commentItemHeader}>
-          <div className={styles.nickname}>{comment.author}</div>
+          <div className={styles.nickname}>{comment.nickname}</div>
           <div className={styles.iconWrap}>
-            <div onClick={() => onEditClick(comment.id, comment.text)}>
+            <div onClick={() => onEditClick(comment.commentId, comment.text)}>
               <Icon
                 type={'IconEdit'}
                 className={styles.icon}

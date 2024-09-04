@@ -1,11 +1,11 @@
 import React, { createContext, useCallback, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { createPost } from '../api/post';
+import { useNavigate } from 'react-router-dom';
+import { createPost } from '../api/post';
 
 export const PostFormContext = createContext();
 
 export const PostFormProvider = ({ children }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const voteId = () => {
@@ -46,16 +46,16 @@ export const PostFormProvider = ({ children }) => {
       voteItems: uploadWriteVote,
     };
 
-    // try {
-    //   const response = await createPost(newPostData);
-    //   const postId = response.id;
+    try {
+      const response = await createPost(newPostData);
+      const postId = response.id;
 
-    //   console.log("게시글 데이터:", postId, newPostData);
-    //   navigate(`/post/${postId}`);
+      console.log("게시글 데이터:", postId, newPostData);
+      navigate(`/post/${postId}`);
 
-    // } catch (error) {
-    //   console.log(`게시글 작성 등록 오류 : ${error}`);
-    // }
+    } catch (error) {
+      console.log(`게시글 작성 등록 오류 : ${error}`);
+    }
 
   }, [category, title, content, uploadWriteVote]);
 

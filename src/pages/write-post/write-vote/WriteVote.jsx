@@ -14,9 +14,7 @@ const WriteVote = () => {
         ...prevVoteItems,
         {
           id: Date.now(),
-          text: '',
-          votes: 0,
-          delete: true
+          text: ''
         }
       ]);
     }

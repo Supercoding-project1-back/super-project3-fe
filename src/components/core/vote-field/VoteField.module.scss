@@ -35,6 +35,11 @@
       display: block;
       width: 100%;
       padding: 1rem;
+
+      &>span {
+        margin-left: 0.5rem;
+        font-size: $font-size-md;
+      }
     }
   }
 }
