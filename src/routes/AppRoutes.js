@@ -6,7 +6,7 @@ import { Login, AddInfo, KakaoRedirect } from "../pages/auth";
 import { PostDetail } from "../pages/post-detail";
 import { WritePost } from "../pages/write-post";
 import { Chat, ChatDetail } from "../pages/chat";
-import { Profile } from "../pages/profile";
+import { Profile, EditProfile, MyPosts } from "../pages/profile";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -22,6 +22,8 @@ const AppRoutes = createBrowserRouter([
       { path: "chat", element: <Chat /> },
       { path: "chat/:id", element: <ChatDetail /> },
       { path: "profile", element: <Profile /> },
+      { path: "editprofile", element: <EditProfile /> },
+      { path: "my-posts", element: <MyPosts /> },
     ],
   },
 ]);

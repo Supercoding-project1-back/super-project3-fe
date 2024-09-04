@@ -69,7 +69,6 @@
     font-size: 1.125rem;
     font-weight: bold;
     margin-bottom: 0.625rem;
-    font-family: $font-family-pretendard;
   }
 
   .postList {
@@ -85,18 +84,23 @@
       border-bottom: 1px solid $color-lightGray;
 
       .category {
-        background-color: $color-red;
-        color: $color-white;
-        padding: 0.125rem 0.5rem;
-        border-radius: 0.25rem;
-        font-size: 0.75rem;
+        background-color: $color-apricot;
+        color: $color-green;
+        padding: 0.4rem 0.5rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
         font-family: $font-family-pretendard;
       }
 
       .postTitle {
         flex-grow: 1;
         margin: 0 0.625rem;
-        font-family: $font-family-pretendard;
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       .postDate,

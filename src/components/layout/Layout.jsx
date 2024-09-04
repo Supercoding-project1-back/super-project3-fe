@@ -4,7 +4,7 @@ import { Nav } from "../nav";
 import { Outlet, useLocation } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import { PostFormProvider } from "../../contexts/PostFormContext";
-import { UserProvider } from '../../contexts/UserContext'; 
+import { UserProvider } from "../../contexts/UserContext";
 
 const Layout = () => {
   const location = useLocation();
@@ -18,8 +18,8 @@ const Layout = () => {
     }
 
     // 메인페이지 헤더
-    if (path === '/') {
-      return <Header type={'main'} location={'userLocation'} />
+    if (path === "/") {
+      return <Header type={"main"} location={"userLocation"} />;
     }
     // 게시글상세페이지 헤더
     if (path.startsWith("/post/") && path !== "/post/new") {
@@ -40,6 +40,14 @@ const Layout = () => {
       return <Header type="profile" />;
     }
 
+    if (path === "editprofile") {
+      return <Header type="profile" />;
+    }
+
+    if (path === "my-posts") {
+      return <Header type="profile" />;
+    }
+
     return <Header />;
   };
 
@@ -51,20 +59,21 @@ const Layout = () => {
     if (path === "/login" || path === "/addinfo") {
       return null;
     }
+
     return <Nav />;
   };
 
   return (
     <>
       <PostFormProvider>
-      <UserProvider>
-        <div className={styles.layoutContainer}>
-          {renderHeader()}
-          <div className={styles.contentsContainer}>
-            <Outlet />
+        <UserProvider>
+          <div className={styles.layoutContainer}>
+            {renderHeader()}
+            <div className={styles.contentsContainer}>
+              <Outlet />
+            </div>
+            {renderNav()}
           </div>
-          {renderNav()}
-        </div>
         </UserProvider>
       </PostFormProvider>
     </>
