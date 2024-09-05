@@ -21,7 +21,7 @@ const VoteField = ({ items = [], onVote, isReadOnly, onRemove }) => {
                 onClick={() => onVote && onVote(item.id)}
                 disabled={isReadOnly}
               />
-              <span>{item.text}</span>
+              <span>{item.content}</span>
             </label>
           </li>
         ))}

@@ -12,7 +12,8 @@ const CommentField = ({ postId }) => {
   const [isEditing, setIsEditing] = useState(null);
 
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(4);
+  const [size, setSize] = useState(10);
+
 
 
   // 댓글리스트 가져오기
@@ -21,6 +22,7 @@ const CommentField = ({ postId }) => {
       try {
         const commentListData = await getCommentList(postId, page, size);
         setComments(commentListData.content);
+        console.log(commentListData.content);
       } catch (error) {
         console.error('댓글 목록 로딩 오류:', error);
       }
@@ -33,14 +35,14 @@ const CommentField = ({ postId }) => {
 
 
   // 댓글 추가
-  const addComment = async (text) => {
+  const addComment = async (content) => {
     try {
-      const newComment = await createComment(postId, text);
+      const newComment = await createComment(postId, content);
       setComments((prevComments) => [
         ...prevComments,
         {
           commentId: newComment.commentId,
-          text: newComment.content,
+          content: newComment.content,
           nickname: newComment.nickname,
         },
       ]);
@@ -55,7 +57,7 @@ const CommentField = ({ postId }) => {
     try {
       const updatedComment = await modifyComment(commentId, postId, newText);
       setComments(comments.map((comment) =>
-        comment.commentId === commentId ? { ...comment, text: updatedComment.content } : comment
+        comment.commentId === commentId ? { ...comment, content: updatedComment.content } : comment
       ));
       setIsEditing(null); // 수정모드 종료
     } catch (error) {
@@ -75,11 +77,11 @@ const CommentField = ({ postId }) => {
   };
 
   // 댓글 입력창 제출 버튼 클릭 시, 조건에 따라 호출
-  const handleCommentInputSubmit = (text) => {
+  const handleCommentInputSubmit = (content) => {
     if (isEditing) {
-      editComment(isEditing.commentId, text);
+      editComment(isEditing.commentId, content);
     } else {
-      addComment(text);
+      addComment(content);
     }
   }
 
@@ -93,7 +95,7 @@ const CommentField = ({ postId }) => {
         comments.length > 0 ? (
           <CommentList
             comments={comments}
-            onEditClick={(commentId, text) => setIsEditing({ commentId, text })}
+            onEditClick={(commentId, content) => setIsEditing({ commentId, content })}
             deleteComment={deleteComment}
           />
         ) : (

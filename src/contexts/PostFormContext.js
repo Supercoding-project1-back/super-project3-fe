@@ -16,8 +16,8 @@ export const PostFormProvider = ({ children }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [voteItems, setVoteItems] = useState([
-    { id: voteId(), text: '' },
-    { id: voteId(), text: '' }
+    { id: voteId(), content: '' },
+    { id: voteId(), content: '' }
   ]);
   const [uploadWriteVote, setUploadWriteVote] = useState([]);
 
@@ -31,19 +31,30 @@ export const PostFormProvider = ({ children }) => {
   const removeVoteToPost = useCallback(() => {
     setUploadWriteVote([]);
     setVoteItems([
-      { id: voteId(), text: '' },
-      { id: voteId(), text: '' },
+      { id: voteId(), content: '' },
+      { id: voteId(), content: '' },
     ]);
   }, []);
 
 
   // 작성한 게시글 등록
   const addPost = useCallback(async () => {
+    // 배열 형태의 voteItems를 객체 형태의 voteRequest로 변환
+    const isVoteEmpty = voteItems.every(item => !item.content); // 모든 항목이 비어 있는지 확인
+
+    // voteRequest가 필요 없는 경우 null로 설정
+    const voteRequest = isVoteEmpty
+      ? null
+      : voteItems.reduce((acc, item, index) => {
+        acc[`item${index + 1}`] = item.content || null; // 텍스트가 없으면 null로 설정
+        return acc;
+      }, { item1: null, item2: null, item3: null, item4: null }); // 초기값으로 기본 구조 설정
+
     const newPostData = {
       category,
       title,
       content,
-      voteItems: uploadWriteVote,
+      voteRequest, // 조건에 따라 null 또는 객체
     };
 
     try {

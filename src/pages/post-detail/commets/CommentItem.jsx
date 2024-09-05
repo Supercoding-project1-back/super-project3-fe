@@ -48,7 +48,7 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
           </div>
         </div>
         <div className={styles.commentText}>
-          {comment.text}
+          {comment.content}
         </div>
       </div>
     </div>

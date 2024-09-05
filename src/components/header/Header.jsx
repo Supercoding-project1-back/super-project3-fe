@@ -12,13 +12,14 @@ const Header = ({ type, location }) => {
 
 
   const handleClickBack = () => {
-    if (window.history.length > 2) {
+    if (type === 'detail') {
+      navigate('/');
+    } else if (window.history.length > 2) {
       navigate(-1);
     } else {
       navigate('/');
     }
-  }
-
+  };
   const handleClickLogo = () => {
     navigate('/');
   }
