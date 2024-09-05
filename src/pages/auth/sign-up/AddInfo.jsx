@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { areas } from "../data/area";
+import { areas } from "../../../assets/data/area";
 import styles from "./AddInfo.module.scss";
 import { updateResidence } from "../../../api/authApi";
 

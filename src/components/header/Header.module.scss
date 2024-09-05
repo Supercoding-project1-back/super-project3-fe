@@ -1,6 +1,8 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .header {
+  position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -9,7 +11,8 @@
   background-color: $color-lightGray;
 }
 
-.header.mainHeader {
+.header.mainHeader,
+.header.profileHeader {
   .leftWrap {
     display: flex;
     justify-content: center;
@@ -27,7 +30,6 @@
     height: 2rem;
   }
 }
-
 
 .writeHeader {
   button {

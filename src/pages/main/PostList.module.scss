@@ -1,0 +1,77 @@
+@import "../../styles/variables.scss";
+
+.postList {
+  display: flex;
+  flex-direction: column;
+}
+
+.postItem {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 1rem;
+}
+
+.postImg {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.postContent {
+  flex-grow: 1;
+  padding-bottom: 1rem;
+  border-bottom: 4px solid rgba($color-darkGray, 0.2);
+}
+
+.contentWrapper {
+  padding-bottom: 0.5rem;
+}
+
+.postTitle {
+  font-size: $font-size-lg;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0;
+  color: $color-green;
+  font-family: $font-family-pretendard;
+}
+
+.postText {
+  font-size: $font-size-md;
+  color: $color-darkGray;
+  font-family: $font-family-pretendard;
+}
+
+.postDetails {
+  display: flex;
+  gap: 10px;
+  font-size: $font-size-md;
+  color: $color-darkGray;
+}
+
+.readMoreText {
+  margin-top: 10px;
+  align-self: center;
+}
+
+.detailInfos {
+  display: flex;
+  align-items: center;
+
+  .iconTime {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .iconViews {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.endMessage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}

@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from "react";
+import CategoryFilter from "./CategoryFilter";
+import PopularPosts from "./PopularPosts";
+import PostList from "./PostList";
 
 const Main = () => {
+  const [selectedCategory, setSelectedCategory] = useState("전체글");
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
-    <div>
-      메인입니다.
-    </div>
+    <>
+      <CategoryFilter
+        onCategoryChange={handleCategoryChange}
+        selectedCategory={selectedCategory}
+      />
+      <PopularPosts selectedCategory={selectedCategory} />
+      <PostList selectedCategory={selectedCategory} />
+    </>
   );
 };
 

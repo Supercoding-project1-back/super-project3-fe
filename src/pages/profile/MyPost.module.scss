@@ -1,0 +1,57 @@
+@import "../../styles/variables.scss";
+
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 8px 100px 8px;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: $color-black;
+  }
+
+  .postList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .postItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid $color-lightGray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .category {
+      background-color: $color-apricot;
+      color: $color-black;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      margin-right: 15px;
+    }
+
+    .postTitle {
+      flex: 1;
+      color: $color-black;
+      text-decoration: none;
+      font-size: 1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .postDate {
+      font-size: 0.875rem;
+      color: $color-darkGray;
+    }
+  }
+}

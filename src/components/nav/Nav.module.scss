@@ -1,8 +1,11 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 nav {
+  position: fixed;
+  bottom: 0;
   width: 100%;
   padding: 1rem;
+  background-color: $color-white;
   box-shadow: 0rem -0.15rem 0.4rem 0rem $color-lightGray;
 
   ul {

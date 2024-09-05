@@ -9,6 +9,8 @@ const CommentInput = ({ addComment, editComment, initialText }) => {
     setText(initialText);
   }, [initialText]);
 
+
+
   const handleChangeInput = (name, value) => {
     setText(value);
   };
