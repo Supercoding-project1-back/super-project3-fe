@@ -13,11 +13,12 @@
 }
 
 .postImg {
-  width: 100%;
+  width: 450px;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
 }
+
 .postContent {
   flex-grow: 1;
   padding-bottom: 1rem;
@@ -48,6 +49,20 @@
   gap: 10px;
   font-size: $font-size-md;
   color: $color-darkGray;
+}
+
+.postImage {
+  width: 100%; /* 이미지 크기 조정 */
+  height: auto; /* 이미지 크기 조정 */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px; /* 이미지와 텍스트 사이에 공간 추가 */
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .readMoreText {

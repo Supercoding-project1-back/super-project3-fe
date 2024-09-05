@@ -1,5 +1,6 @@
+// PopularPosts.js
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getPopularPosts } from "../../api/postListApi";
 import { Link } from "react-router-dom";
 import styles from "./PopularPosts.module.scss";
 import postImage from "../../assets/icons/icon-image.svg";
@@ -9,48 +10,21 @@ const PopularPosts = ({ selectedCategory }) => {
   const [popularPosts, setPopularPosts] = useState([]);
 
   useEffect(() => {
-    const getPopularPosts = async () => {
+    const fetchPopularPosts = async () => {
       try {
-        const token = localStorage.getItem("token");
-        let resp;
-        if (selectedCategory === "전체글") {
-          // 전체글에 대해 조회
-          resp = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts`,
-            {
-              params: {
-                page: 0,
-                size: 3, // 최대 3개의 게시글만 가져옴
-                sort: "views,desc", // 조회수 기준으로 내림차순 정렬
-              },
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-        } else {
-          // 특정 카테고리에 대해 조회
-          resp = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts-by-category/${selectedCategory}`,
-            {
-              params: {
-                page: 0,
-                size: 3,
-                sort: "views,desc", // 조회수 기준으로 내림차순 정렬
-              },
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-        }
-
-        setPopularPosts(resp.data.content); // 인기 게시글 목록 설정
+        const posts = await getPopularPosts(
+          0,
+          3,
+          "views,desc",
+          selectedCategory
+        );
+        setPopularPosts(posts);
       } catch (error) {
         console.error("Error fetching popular posts:", error);
       }
     };
-    getPopularPosts(); // 카테고리 변경 시 인기 게시글 조회
+
+    fetchPopularPosts(); // 카테고리 변경 시 인기 게시글 조회
   }, [selectedCategory]);
 
   return (
@@ -80,7 +54,11 @@ const PopularPosts = ({ selectedCategory }) => {
                 </div>
               </div>
               <div className={styles.postImage}>
-                <img src={postImage} alt="이미지" />
+                {post.postDetailResponse?.image1 ? (
+                  <img src={post.postDetailResponse.image1} alt="image1" />
+                ) : (
+                  <img src={postImage} alt="기본 이미지" />
+                )}
               </div>
             </Link>
           </li>
