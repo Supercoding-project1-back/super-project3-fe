@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { getUserPosts } from "../../api/postListApi";
 import { Link } from "react-router-dom";
 import styles from "./MyPost.module.scss";
 
@@ -7,28 +7,16 @@ const MyPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
-    const fetchUserPosts = async () => {
+    const fetchPosts = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts-by-user`,
-          {
-            params: {
-              page: 0,
-              size: 100,
-            },
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUserPosts(response.data.content);
+        const posts = await getUserPosts(0, 1000, "createdAt,desc");
+        setUserPosts(posts);
       } catch (error) {
-        console.error("유저 정보 조회에 실패했습니다.", error);
+        console.error("유저 게시글 조회에 실패했습니다.", error);
       }
     };
 
-    fetchUserPosts();
+    fetchPosts();
   }, []);
 
   return (

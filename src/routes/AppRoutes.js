@@ -23,7 +23,7 @@ const AppRoutes = createBrowserRouter([
       { path: "chat/:id", element: <ChatDetail /> },
       { path: "profile", element: <Profile /> },
       { path: "editprofile", element: <EditProfile /> },
-      { path: "my-posts", element: <MyPosts /> },
+      { path: "myposts", element: <MyPosts /> },
     ],
   },
 ]);

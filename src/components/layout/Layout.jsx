@@ -40,11 +40,11 @@ const Layout = () => {
       return <Header type="profile" />;
     }
 
-    if (path === "editprofile") {
+    if (path === "/editprofile") {
       return <Header type="profile" />;
     }
 
-    if (path === "my-posts") {
+    if (path === "/myposts") {
       return <Header type="profile" />;
     }
 

@@ -1,9 +1,28 @@
 import axios from "axios";
 
-// 사용자 정보를 가져오는 API 호출 함수
+// 사용자 정보 업데이트 API
+export const updateUserData = async (updatedUserData) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.put(
+      `${process.env.REACT_APP_API_BASE_URL}/api/users/me`,
+      updatedUserData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data; // 성공 시 응답 데이터 반환
+  } catch (error) {
+    console.error("유저 정보 업데이트 실패", error);
+    throw error; // 에러 처리
+  }
+};
+
 const fetchUserData = async () => {
   try {
-    const token = localStorage.getItem("token"); // 로컬스토리지에서 토큰 가져오기
+    const token = localStorage.getItem("token");
 
     if (!token) {
       throw new Error("유저 정보가 없습니다. 로그인 해주세요.");

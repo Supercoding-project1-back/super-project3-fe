@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { getPostsByUser } from "../../api/postListApi";
 import fetchUserData from "../../api/userApi";
+import { Link, useNavigate } from "react-router-dom";
 import ImgViewField from "../../components/core/img-view-field/ImgViewField";
 import Button from "../../components/core/button-field/ButtonField";
 import styles from "./Profile.module.scss";
@@ -9,10 +9,11 @@ import EditProfile from "./EditProfile";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
+  // 사용자 데이터 가져오기
   useEffect(() => {
     const getUserData = async () => {
       const data = await fetchUserData();
@@ -22,26 +23,11 @@ const Profile = () => {
     getUserData();
   }, []);
 
+  // 사용자 게시글 가져오기
   useEffect(() => {
     const fetchUserPosts = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/api/posts/posts-by-user`,
-          {
-            params: {
-              page: 0,
-              size: 5, // 첫 페이지에서 5개의 게시글만 가져옴
-            },
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUserPosts(response.data.content); // 사용자가 쓴 글 목록 설정
-      } catch (error) {
-        console.error("게시글 조회에 실패했습니다.", error);
-      }
+      const posts = await getPostsByUser(0, 5, "createdAt,desc");
+      setUserPosts(posts);
     };
 
     fetchUserPosts();
@@ -61,7 +47,7 @@ const Profile = () => {
   };
 
   const handleViewAllClick = () => {
-    navigate("/my-posts");
+    navigate("/myposts");
   };
 
   if (!userData) {
@@ -102,7 +88,7 @@ const Profile = () => {
           </section>
 
           <section className={styles.postsSection}>
-            <h4>내가 쓴 글 ({userPosts.length})</h4>{" "}
+            <h4>내가 쓴 글 ({userPosts.length})</h4>
             <ul className={styles.postList}>
               {userPosts.map((post) => (
                 <li key={post.id} className={styles.postItem}>

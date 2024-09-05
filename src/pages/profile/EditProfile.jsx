@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { updateUserData } from "../../api/userApi";
 import ImgViewField from "../../components/core/img-view-field/ImgViewField";
 import Button from "../../components/core/button-field/ButtonField";
 import { areas } from "../../assets/data/area";
@@ -30,29 +30,21 @@ const EditProfile = ({ userData, onSave, onCancel }) => {
 
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem("token");
       const residence = `${selectedArea} ${selectedSubArea}`;
+      const cleanIntroduction = introduction.trim();
 
       const updatedUserData = {
         nickname,
         residence,
         profilePicture,
-        introduction,
+        introduction: cleanIntroduction,
       };
 
-      await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/api/users/me`,
-        updatedUserData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await updateUserData(updatedUserData);
 
       onSave(updatedUserData);
     } catch (error) {
-      console.error("유저 정보 조회를 실패했습니다.", error);
+      console.error("유저 정보 업데이트 실패", error);
     }
   };
 
