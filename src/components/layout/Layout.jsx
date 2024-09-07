@@ -3,6 +3,7 @@ import { Header } from '../header';
 import { Nav } from '../nav';
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Layout.module.scss';
+import { PopupModalProvider } from '../../contexts/PopupModalContext';
 
 const Layout = () => {
   const location = useLocation();
@@ -48,13 +49,15 @@ const Layout = () => {
 
   return (
     <>
-      <div className={styles.layoutContainer}>
-        {renderHeader()}
-        <div className={styles.contentsContainer}>
-          <Outlet />
+      <PopupModalProvider>
+        <div className={styles.layoutContainer}>
+          {renderHeader()}
+          <div className={styles.contentsContainer}>
+            <Outlet />
+          </div>
+          {renderNav()}
         </div>
-        {renderNav()}
-      </div>
+      </PopupModalProvider>
     </>
   );
 };
