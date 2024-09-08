@@ -4,6 +4,7 @@ import { Nav } from "../nav";
 import { Outlet, useLocation } from "react-router-dom";
 import styles from "./Layout.module.scss";
 import { PostFormProvider } from "../../contexts/PostFormContext";
+import { PopupModalProvider } from '../../contexts/PopupModalContext';
 import { UserProvider } from "../../contexts/UserContext";
 
 const Layout = () => {
@@ -22,13 +23,13 @@ const Layout = () => {
       return <Header type={"main"} location={"userLocation"} />;
     }
     // 게시글상세페이지 헤더
-    if (path.startsWith("/post/") && path !== "/post/new") {
+    if (path.startsWith("/post/") && (!path.includes("new") && !path.includes("edit"))) {
       return <Header type={"detail"} />;
     }
 
     // 글쓰기페이지 헤더
-    if (path === "/post/new") {
-      return <Header type="write" />;
+    if (path.startsWith("/post/") && (path.includes("new") || path.includes("edit"))) {
+      return <Header type={"write"} />;
     }
     // 채팅상세페이지 헤더
     if (path.startsWith("/chat/") && path !== "/chat") {
@@ -65,17 +66,19 @@ const Layout = () => {
 
   return (
     <>
-      <PostFormProvider>
-        <UserProvider>
-          <div className={styles.layoutContainer}>
-            {renderHeader()}
-            <div className={styles.contentsContainer}>
-              <Outlet />
+      <PopupModalProvider>
+        <PostFormProvider>
+          <UserProvider>
+            <div className={styles.layoutContainer}>
+              {renderHeader()}
+              <div className={styles.contentsContainer}>
+                <Outlet />
+              </div>
+              {renderNav()}
             </div>
-            {renderNav()}
-          </div>
-        </UserProvider>
-      </PostFormProvider>
+          </UserProvider>
+        </PostFormProvider>
+      </PopupModalProvider>
     </>
   );
 };

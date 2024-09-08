@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
-import styles from "./Header.module.scss";
-import { Icon } from "../core";
-import { useNavigate } from "react-router";
-import { PostFormContext } from "../../contexts/PostFormContext";
+import React, { useContext } from 'react';
+import styles from './Header.module.scss';
+import { Icon } from '../core';
+import { useNavigate } from 'react-router';
+import { PostFormContext } from '../../contexts/PostFormContext';
+import { PopupModalContext } from '../../contexts/PopupModalContext';
 import { UserContext } from "../../contexts/UserContext";
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
   // console.log(window.history);
-  const { addPost } = useContext(PostFormContext);
+
+  const { isEdit, addPost, updatePost } = useContext(PostFormContext);
+  const { openPopupHandler } = useContext(PopupModalContext);
   const { userLocation } = useContext(UserContext);
+
 
   const handleClickBack = () => {
     if (window.history.length > 2) {
@@ -22,6 +26,7 @@ const Header = ({ type, location }) => {
   const handleClickLogo = () => {
     navigate("/");
   };
+
 
   const headerContent = () => {
     switch (type) {
@@ -46,7 +51,7 @@ const Header = ({ type, location }) => {
               <Icon type={"IconBack"} className={styles.iconBack} />
             </div>
             <div className={styles.rightWrap}>
-              <Icon type={"IconMore"} />
+              <Icon type={'IconMore'} onClick={() => openPopupHandler('post')} />
             </div>
           </header>
         );
@@ -55,11 +60,21 @@ const Header = ({ type, location }) => {
       case "write":
         return (
           <header className={`${styles.header} ${styles.writeHeader}`}>
-            <div className={styles.leftWrap} onClick={handleClickBack}>
-              <Icon type={"IconBack"} className={styles.iconBack} />
+            <div className={styles.leftWrap}>
+              {!isEdit ? (
+                <Icon
+                  type={'IconBack'}
+                  className={styles.iconBack}
+                  onClick={handleClickBack}
+                />
+              ) : null}
             </div>
             <div className={styles.rightWrap}>
-              <button onClick={addPost}>등록</button>
+              {!isEdit ? (
+                <button onClick={addPost}>등록</button>
+              ) : (
+                <button onClick={updatePost}>완료</button>
+              )}
             </div>
           </header>
         );

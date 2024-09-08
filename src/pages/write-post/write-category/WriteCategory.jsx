@@ -7,7 +7,7 @@ const WriteCategory = () => {
   const [activeCategory, setActiveCategory] = useState(null);
 
   const { setCategory } = useContext(PostFormContext);
-  const categories = ['일상', '질문', '구매'];
+  const categories = ['일상글', '질문글', '구매글'];
 
   const handleClickCategory = useCallback((category) => {
     setActiveCategory(category);

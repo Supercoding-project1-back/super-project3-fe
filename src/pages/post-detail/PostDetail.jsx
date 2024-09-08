@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './PostDetail.module.scss';
 import { CommentField } from './commets';
 import {
@@ -10,22 +11,33 @@ import {
   PostMap
 } from './';
 import ImgViewField from '../../components/core/img-view-field/ImgViewField';
-import { useParams } from 'react-router-dom';
 import { getPostById } from '../../api/post';
+import { PopupModalContext } from '../../contexts/PopupModalContext';
 
 const PostDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const { Popup, popupType } = useContext(PopupModalContext);
+
+  // 상세페이지 리스트
   useEffect(() => {
     const fetchPost = async () => {
       try {
+        if (typeof id !== 'string') {
+          console.error('잘못된 ID 형식:', id);  // ID가 문자열이 아닌 경우 로그 출력
+          return;
+        }
         const data = await getPostById(id);
+        console.log(data);
         setPost(data);
         setLoading(false);
+
       } catch (error) {
-        console.error(`게시글 로딩 중 오류 발생 : ${error}`);
+        // console.error(`게시글 로딩 중 오류 발생 : ${error}`);
         setLoading(false);
       }
     };
@@ -33,6 +45,11 @@ const PostDetail = () => {
     fetchPost();
   }, [id]);
 
+
+  // 게시글 수정
+  const handleModifyPost = async () => {
+    navigate(`/post/edit/${id}`, { state: { post } });
+  };
 
   if (loading) {
     return <div>로딩 중...</div>;
@@ -73,7 +90,7 @@ const PostDetail = () => {
       </section>
 
       <section className={styles.wrap}>
-        <PostVote />
+        <PostVote voteItems={post.voteResponse} voteId={post.voteResponse.id} />
       </section>
 
       <section className={styles.wrap}>
@@ -82,6 +99,21 @@ const PostDetail = () => {
 
       {/* 댓글 영역 */}
       <CommentField postId={post.id} />
+
+
+      {/* 게시글 수정/삭제 팝업창 */}
+      <Popup customClass={styles.popupModal}>
+        {popupType === 'post' && (
+          <>
+            <div className={styles.buttonWrap} onClick={handleModifyPost}>
+              <button>수정</button>
+            </div>
+            <div className={styles.buttonWrap}>
+              <button>삭제</button>
+            </div>
+          </>
+        )}
+      </Popup>
     </>
   )
 };

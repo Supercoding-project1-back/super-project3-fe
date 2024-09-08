@@ -3,7 +3,7 @@ import styles from './VoteField.module.scss';
 import { Icon } from '../';
 
 
-const VoteField = ({ items = [], onVote, isReadOnly, onRemove }) => {
+const VoteField = ({ items = [], isReadOnly, onRemove }) => {
   return (
     <div className={styles.voteWrap}>
       <div className={styles.titleWrap}>
@@ -18,10 +18,9 @@ const VoteField = ({ items = [], onVote, isReadOnly, onRemove }) => {
               <input
                 type="radio"
                 name="vote"
-                onClick={() => onVote && onVote(item.id)}
                 disabled={isReadOnly}
               />
-              <span>{item.text}</span>
+              <span>{item.content}</span>
             </label>
           </li>
         ))}
