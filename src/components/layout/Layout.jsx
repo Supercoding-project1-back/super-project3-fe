@@ -23,12 +23,12 @@ const Layout = () => {
     }
 
     // 게시글상세페이지 헤더
-    if (path.startsWith("/post/") && path !== "/post/new") {
+    if (path.startsWith("/post/") && (!path.includes("new") && !path.includes("edit"))) {
       return <Header type={"detail"} />;
     }
 
     // 글쓰기페이지 헤더
-    if (path === "/post/new") {
+    if (path.startsWith("/post/") && (path.includes("new") || path.includes("edit"))) {
       return <Header type={"write"} />;
     }
 

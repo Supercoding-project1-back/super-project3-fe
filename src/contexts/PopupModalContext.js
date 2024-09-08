@@ -1,20 +1,20 @@
 import { createContext, useCallback, useState } from "react";
 import ModalField from "../components/core/modal-field/ModalField";
 
-const PopupModalContext = createContext();
+export const PopupModalContext = createContext();
 
 export const PopupModalProvider = ({ children }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupModalType, setPopupModalType] = useState(null);
+  const [popupType, setPopupType] = useState('');
 
-  const openPopupHandler = useCallback(() => {
-    setPopupModalType(type);
+  const openPopupHandler = useCallback((type) => {
+    setPopupType(type);
     setIsPopupOpen(true);
   }, [])
 
   const closePopupHandler = useCallback(() => {
     setIsPopupOpen(false);
-    setPopupModalType(type);
+    setPopupType(null);
   }, []);
 
   const Popup = useCallback(({ children, customClass }) => (
@@ -26,11 +26,12 @@ export const PopupModalProvider = ({ children }) => {
     >
       {children}
     </ModalField>
-  ), []);
+  ), [isPopupOpen, closePopupHandler]);
 
   return (
     <PopupModalContext.Provider
-      value={{ openPopupHandler, closePopupHandler, Popup, popupModalType }}>
+      value={{ openPopupHandler, closePopupHandler, Popup, popupType }}
+    >
       {children}
     </PopupModalContext.Provider>
   );

@@ -8,3 +8,14 @@
 .postInfo {
   display: flex;
 }
+
+.popupModal {
+  .buttonWrap {
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      border-bottom: 1px solid $color-lightGray;
+    }
+  }
+}

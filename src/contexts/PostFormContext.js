@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createPost } from '../api/post';
+import { createPost, modifyPost } from '../api/post';
 
 export const PostFormContext = createContext();
 
@@ -20,6 +20,7 @@ export const PostFormProvider = ({ children }) => {
     { id: voteId(), content: '' }
   ]);
   const [uploadWriteVote, setUploadWriteVote] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
 
 
   // 글쓰기페이지에 투표 첨부
@@ -48,13 +49,13 @@ export const PostFormProvider = ({ children }) => {
       : voteItems.reduce((acc, item, index) => {
         acc[`item${index + 1}`] = item.content || null; // 텍스트가 없으면 null로 설정
         return acc;
-      }, { item1: null, item2: null, item3: null, item4: null }); // 초기값으로 기본 구조 설정
+      }, { item1: null, item2: null, item3: null, item4: null });
 
     const newPostData = {
       category,
       title,
       content,
-      voteRequest, // 조건에 따라 null 또는 객체
+      voteRequest,
     };
 
     try {
@@ -72,6 +73,28 @@ export const PostFormProvider = ({ children }) => {
 
 
 
+  // 게시글 수정
+  const updatePost = useCallback(async (id) => {
+    const isVoteEmpty = voteItems.every(item => !item.content);
+
+    const voteRequest = isVoteEmpty
+      ? null
+      : voteItems.reduce((acc, item, index) => {
+        acc[`item${index + 1}`] = item.content || null;
+        return acc;
+      }, { item1: null, item2: null, item3: null, item4: null });
+
+    const updatedPostData = { category, title, content, voteRequest };
+
+    try {
+      await modifyPost(id, updatedPostData);
+      navigate(`/post/${id}`);
+
+    } catch (error) {
+      console.log(`게시글 수정 오류 : ${error}`);
+    }
+  }, [category, title, content, voteItems, navigate]);
+
   return (
     <PostFormContext.Provider
       value={{
@@ -85,9 +108,12 @@ export const PostFormProvider = ({ children }) => {
         setVoteItems,
         uploadWriteVote,
         setUploadWriteVote,
+        isEdit,
+        setIsEdit,
         addVoteToPost,
         removeVoteToPost,
         addPost,
+        updatePost
       }}
     >
       {children}
