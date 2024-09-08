@@ -7,8 +7,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 // 새 게시글 작성 api
 export const createPost = async (newPostData) => {
   try {
-    // const token = localStorage.getItem('token');
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTYxZUBkYXVtLm5ldCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjU3ODk1NTYsImV4cCI6MTcyNTc5MzE1Nn0.bpLZ1jxf1BWR6qwPGK3zu6FmgxkwT1hABXbr1wR92e8';
+    const token = localStorage.getItem('token');
 
     // voteRequest가 없으면 null로 설정
     const postData = {
@@ -61,8 +60,7 @@ export const getPostById = async (id) => {
 // 게시글 수정
 export const modifyPost = async (id) => {
   try {
-    // const token = localStorage.getItem('token');
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTYxZUBkYXVtLm5ldCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjU3ODk1NTYsImV4cCI6MTcyNTc5MzE1Nn0.bpLZ1jxf1BWR6qwPGK3zu6FmgxkwT1hABXbr1wR92e8';
+    const token = localStorage.getItem('token');
 
     const modifiedPostData = {
       title: post.title,

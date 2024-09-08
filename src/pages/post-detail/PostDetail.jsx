@@ -32,6 +32,7 @@ const PostDetail = () => {
           return;
         }
         const data = await getPostById(id);
+        console.log(data);
         setPost(data);
         setLoading(false);
 
@@ -89,7 +90,7 @@ const PostDetail = () => {
       </section>
 
       <section className={styles.wrap}>
-        <PostVote voteItems={post.voteRequest} />
+        <PostVote voteItems={post.voteResponse} voteId={post.voteResponse.id} />
       </section>
 
       <section className={styles.wrap}>
