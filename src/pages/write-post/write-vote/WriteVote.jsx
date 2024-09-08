@@ -14,9 +14,7 @@ const WriteVote = () => {
         ...prevVoteItems,
         {
           id: Date.now(),
-          text: '',
-          votes: 0,
-          delete: true
+          content: ''
         }
       ]);
     }
@@ -25,7 +23,7 @@ const WriteVote = () => {
 
   const handleChangeVoteItem = useCallback((id, value) => {
     setVoteItems(prevVoteItems => prevVoteItems.map(item =>
-      item.id === id ? { ...item, text: value } : item
+      item.id === id ? { ...item, content: value } : item
     ));
   }, [setVoteItems]);
 
@@ -45,8 +43,8 @@ const WriteVote = () => {
                 <div className={styles.inputWrap}>
                   <InputTextField
                     className={styles.voteInput}
-                    name={voteItem.text}
-                    value={voteItem.text}
+                    name={voteItem.content}
+                    value={voteItem.content}
                     placeholder='항목을 입력해주세요'
                     rows={1}
                     onChange={(name, value) => handleChangeVoteItem(voteItem.id, value)}

@@ -60,7 +60,7 @@ const ModalField = ({ open, onClose, children, variant, customClass }) => {
                 <button
                   className={styles.submitButton}
                   onClick={handleRegisterVote}
-                >투표등록</button>
+                >등록</button>
               )}
             </div>
           )}

@@ -10,6 +10,11 @@ const Nav = () => {
     navigate('/');
   }
 
+  const handleClickWrite = () => {
+    navigate('/post/new');
+
+  }
+
   const handleClickChat = () => {
     navigate('/chat');
   }
@@ -27,6 +32,13 @@ const Nav = () => {
             className={styles.icon}
           />
           <span className={styles.title}>홈</span>
+        </li>
+        <li onClick={handleClickWrite}>
+          <Icon
+            type={'IconEdit'}
+            className={styles.icon}
+          />
+          <span className={styles.title}>글쓰기</span>
         </li>
         <li onClick={handleClickChat}>
           <Icon
