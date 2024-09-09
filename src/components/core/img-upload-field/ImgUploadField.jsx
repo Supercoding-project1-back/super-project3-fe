@@ -5,26 +5,40 @@ import { Icon } from '..';
 const ImgUploadField = ({ onChange }) => {
   const fileInputRef = useRef(null);
 
-  const handleFileChange = (event) => {
-    const files = Array.from(event.target.files);
-    if (files.length > 0) {
-      onChange(files);
+  const ImgUploadClickHandler = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+
+  const handleImageChange = (event) => {
+    const file = event?.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        onChange(e.target.result); // Base64 데이터를 부모 컴포넌트로 전달
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   return (
-    <div className={styles.uploadContainer}>
+    <div
+      className={styles.container}
+      onClick={ImgUploadClickHandler}
+    >
       <input
         type="file"
+        accept="image/*"
         ref={fileInputRef}
-        onChange={handleFileChange}
-        multiple
+        onChange={handleImageChange}
         className={styles.fileInput}
       />
-      <div className={styles.uploadButton} onClick={() => fileInputRef.current.click()}>
-        <Icon type={'IconUpload'} />
-        <span>이미지 업로드</span>
-      </div>
+      <>
+        <Icon type={'IconImage'} className={styles.icon} />
+        <span>사진</span>
+      </>
     </div>
   );
 };
