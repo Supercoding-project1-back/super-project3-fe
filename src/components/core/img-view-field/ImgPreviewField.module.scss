@@ -1,0 +1,33 @@
+@import '../../../styles/variables.scss';
+
+ul.previewContainer {
+  display: flex;
+
+}
+
+.previewWrap {
+  border: 1px solid $color-lightGray;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+
+  .previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  .icon {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

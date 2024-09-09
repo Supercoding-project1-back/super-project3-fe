@@ -6,18 +6,19 @@ import {
   WriteContents,
   WriteVote
 } from './';
-import { Icon, Vote } from '../../components/core';
+import { Icon, ImgPreview, ImgUpload, Vote } from '../../components/core';
 import useModal from '../../hooks/useModal';
 import { PostFormContext } from '../../contexts/PostFormContext';
-import { getPostById } from '../../api/post';
+import { getPostById } from '../../api/postDetailApi';
 import { useParams } from 'react-router';
 
 
 const WritePost = () => {
   const { id } = useParams();
 
-  const { setIsEdit, setCategory, setTitle, setContent, setVoteItems, uploadWriteVote, removeVoteToPost } = useContext(PostFormContext);
+  const { setIsEdit, setCategory, setTitle, setContent, setVoteItems, uploadWriteVote, removeVoteToPost, images, setImages, addImage, removeImage } = useContext(PostFormContext);
   const { Modal, openModalHandler } = useModal(null);
+  // const [images, setImages] = useState([]);
 
 
   useEffect(() => {
@@ -40,6 +41,19 @@ const WritePost = () => {
   }, [id, setCategory, setTitle, setContent, setVoteItems]);
 
 
+  // 이미지 미리보기 설정
+  // const handleImageChange = (newImage) => {
+  //   if (images.length >= 2) {
+  //     alert("이미지는 최대 2개까지 업로드할 수 있습니다.");
+  //     return;
+  //   }
+  //   setImages((prevImages) => [...prevImages, newImage]);
+  // };
+
+  // const handleImageRemove = (index) => {
+  //   setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  // };
+
   return (
     <div className={styles.container}>
       <section className={styles.wrap}>
@@ -61,19 +75,30 @@ const WritePost = () => {
       ) : null}
 
 
+
+      {images.length > 0 && (
+        <section className={styles.imagePreview}>
+          <ImgPreview images={images} onRemove={removeImage} />
+        </section>
+      )}
+
+
       <section className={`${styles.wrap} ${styles.buttonsWrap}`}>
         <ul>
           <li>
-            <Icon type={'IconImage'} className={styles.icon} />
-            <span>사진</span>
+            <ImgUpload onChange={addImage} />
           </li>
           <li>
-            <Icon type={'IconLocation'} className={styles.icon} />
-            <span>위치</span>
+            <div>
+              <Icon type={'IconLocation'} className={styles.icon} />
+              <span>위치</span>
+            </div>
           </li>
           <li onClick={openModalHandler}>
-            <Icon type={'IconVote'} className={styles.icon} />
-            <span>투표</span>
+            <div>
+              <Icon type={'IconVote'} className={styles.icon} />
+              <span>투표</span>
+            </div>
           </li>
         </ul>
       </section>

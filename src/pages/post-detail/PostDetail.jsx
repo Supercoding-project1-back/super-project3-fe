@@ -11,7 +11,7 @@ import {
   PostMap
 } from './';
 import ImgViewField from '../../components/core/img-view-field/ImgViewField';
-import { getPostById } from '../../api/post';
+import { deletePost, getPostById } from '../../api/postDetailApi';
 import { PopupModalContext } from '../../contexts/PopupModalContext';
 
 const PostDetail = () => {
@@ -59,6 +59,26 @@ const PostDetail = () => {
     return <div>게시글을 불러오지 못했습니다.</div>;
   }
 
+
+  const handleDeletePost = async () => {
+    try {
+      await deletePost(id);
+      alert('게시글이 삭제되었습니다.');
+      navigate('/'); // 삭제 후 메인 페이지로 이동
+    } catch (error) {
+      console.error('게시글 삭제 오류:', error);
+      alert('게시글 삭제에 실패했습니다.');
+    }
+  };
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (!post) {
+    return <div>게시글을 불러오지 못했습니다.</div>;
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -84,14 +104,22 @@ const PostDetail = () => {
         </section>
 
         <section className={styles.wrap}>
-          <ImgViewField src="https://cafe24img.poxo.com/dinotaeng/web/product/small/202205/b7bb570a94d0732787fc2110ec4bbe6c.png"
+          {/* <ImgViewField src="https://cafe24img.poxo.com/dinotaeng/web/product/small/202205/b7bb570a94d0732787fc2110ec4bbe6c.png"
             alt="Example Image"
             className={styles.img}
-            onErrorSrc="https://example.com/fallback-image.svg" />
+            onErrorSrc="https://example.com/fallback-image.svg" /> */}
+
+          {post.images && post.images.length > 0 && (
+            <ImgViewField
+              src={post.images[0]} // 첫 번째 이미지 URL을 예로 사용
+              alt="게시글 이미지"
+              className={styles.img}
+            />
+          )}
         </section>
 
         <section className={styles.wrap}>
-          <PostVote voteItems={post.voteResponse} voteId={post.voteResponse.id} />
+          <PostVote voteItems={post.voteResponse} />
         </section>
 
         <section className={styles.wrap}>
@@ -110,7 +138,7 @@ const PostDetail = () => {
             <div className={styles.buttonWrap} onClick={handleModifyPost}>
               <button>수정</button>
             </div>
-            <div className={styles.buttonWrap}>
+            <div className={styles.buttonWrap} onClick={handleDeletePost}>
               <button>삭제</button>
             </div>
           </>
