@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './CommentField.module.scss';
 import CommentList from './CommentList';
 import CommentInput from './CommentInput';
-import { createComment, deleteCommentApi, getCommentList, modifyComment } from '../../../api/comment';
+import { createComment, deleteCommentApi, getCommentList, modifyComment } from '../../../api/commentApi';
 
 const CommentField = ({ postId }) => {
   // 댓글 상태 관리

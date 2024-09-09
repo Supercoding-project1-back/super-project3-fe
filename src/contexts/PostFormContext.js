@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createPost, modifyPost } from '../api/post';
+import { createPost, modifyPost } from '../api/postDetailApi';
+import { uploadPostDetail } from '../api/imageApi';
 
 export const PostFormContext = createContext();
 
@@ -20,6 +21,7 @@ export const PostFormProvider = ({ children }) => {
     { id: voteId(), content: '' }
   ]);
   const [uploadWriteVote, setUploadWriteVote] = useState([]);
+  const [images, setImages] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
 
 
@@ -35,6 +37,21 @@ export const PostFormProvider = ({ children }) => {
       { id: voteId(), content: '' },
       { id: voteId(), content: '' },
     ]);
+  }, []);
+
+
+  // 이미지 추가
+  const addImage = useCallback((image) => {
+    if (images.length < 2) {
+      setImages((prevImages) => [...prevImages, image]);
+    } else {
+      alert('이미지는 최대 2개까지 업로드할 수 있습니다.');
+    }
+  }, [images]);
+
+  // 이미지 삭제
+  const removeImage = useCallback((index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   }, []);
 
 
@@ -62,14 +79,23 @@ export const PostFormProvider = ({ children }) => {
       const response = await createPost(newPostData);
       const postId = response.id;
 
-      console.log("게시글 데이터:", postId, newPostData);
+      // console.log("게시글 데이터:", postId, newPostData);
+
+      // 두 번째 API 호출: 이미지 및 지도 정보 업로드
+      if (images.length > 0) {
+        const formData = new FormData();
+        images.forEach((image, index) => formData.append(`image${index + 1}`, image));
+
+        await uploadPostDetail(postId, formData);
+      }
+
       navigate(`/post/${postId}`);
 
     } catch (error) {
       console.log(`게시글 작성 등록 오류 : ${error}`);
     }
 
-  }, [category, title, content, uploadWriteVote]);
+  }, [category, title, content, uploadWriteVote, images]);
 
 
 
@@ -108,6 +134,9 @@ export const PostFormProvider = ({ children }) => {
         setVoteItems,
         uploadWriteVote,
         setUploadWriteVote,
+        images,
+        addImage,
+        removeImage,
         isEdit,
         setIsEdit,
         addVoteToPost,

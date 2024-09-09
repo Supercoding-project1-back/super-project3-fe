@@ -30,6 +30,12 @@
         padding: 0.5rem;
         cursor: pointer;
 
+        &>div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
         .icon {
           width: 1.4rem;
           height: 1.4rem;

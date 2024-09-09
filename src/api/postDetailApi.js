@@ -90,3 +90,27 @@ export const modifyPost = async (id) => {
     }
   }
 }
+
+
+// 게시글 삭제
+export const deletePost = async (id) => {
+  try {
+    const token = localStorage.getItem('token');
+
+    const response = await axios.delete(`${API_BASE_URL}/api/posts/delete-post/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(`게시글 삭제 오류: ${error.response?.data || error.message}`);
+    if (error.response) {
+      console.log('에러 데이터:', error.response.data);
+      console.log('에러 상태:', error.response.status);
+      console.log('에러 헤더:', error.response.headers);
+    }
+  }
+};
