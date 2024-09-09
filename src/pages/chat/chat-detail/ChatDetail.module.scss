@@ -1,0 +1,98 @@
+@import "../../../styles/variables.scss";
+
+.chatDetailContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
+  padding-bottom: 120px;
+  height: 100vh;
+  background-color: $color-white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: $color-lightGray;
+  .backIcon {
+    background-image: url("/assets/icons/icon-back.svg");
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+  }
+  .chatName {
+    margin-left: 1rem;
+    font-size: $font-size-rg;
+    color: $color-black;
+  }
+}
+
+.chatMessages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: scroll;
+
+  .messageContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    .messageLeft,
+    .messageRight {
+      display: flex;
+      align-items: center;
+      font-size: $font-size-lg;
+      .profileImage {
+        width: 40px;
+        height: 40px;
+        background-color: $color-lightGray;
+        border-radius: 50%;
+      }
+      .message {
+        max-width: 70%;
+        padding: 0.5rem;
+        margin-left: 0.5rem;
+        background-color: $color-lightPurple;
+        border-radius: 8px;
+      }
+    }
+
+    .messageRight {
+      justify-content: flex-end;
+      .message {
+        color: $color-white;
+        background-color: $color-green;
+      }
+    }
+
+    .time {
+      color: $color-darkGray;
+      text-align: right;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: $color-lightGray;
+  border-top: 1px solid $color-lightGray;
+
+  .input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid $color-lightGray;
+    border-radius: 8px;
+    background-color: $color-white;
+  }
+
+  .sendButton {
+    background-image: url("/assets/icons/icon-send.svg");
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+}

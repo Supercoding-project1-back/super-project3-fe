@@ -1,0 +1,83 @@
+@import "../../styles/variables.scss";
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: $color-lightGray;
+  .homeIcon {
+    background-image: url("../../assets/icons/icon-user-single.svg");
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.chatList {
+  flex: 1;
+  padding-top: 16px;
+  padding-bottom: 95px;
+  overflow-y: scroll;
+  .chatItem {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid $color-lightGray;
+
+    .profileImage {
+      width: 50px;
+      height: 50px;
+      background-color: $color-lightGray;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    .chatInfo {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      .chatName {
+        font-size: $font-size-lg;
+        color: $color-black;
+      }
+      .chatMessage {
+        font-size: $font-size-md;
+        color: $color-darkGray;
+      }
+      .chatTime {
+        font-size: $font-size-md;
+        color: $color-darkGray;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: $color-lightGray;
+
+  .chatIcon {
+    background-image: url("../../assets/icons/icon-user-single.svg");
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+  }
+
+  .searchIcon {
+    background-image: url("../../assets/icons/icon-user-single.svg");
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+  }
+}
