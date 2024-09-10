@@ -5,7 +5,6 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 export const uploadPostDetail = async (postId, formData) => {
   try {
     const token = localStorage.getItem('token');
-
     const response = await axios.post(
       `${API_BASE_URL}/api/posts/create-postDetail/${postId}`,
       formData,
