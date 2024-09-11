@@ -21,9 +21,18 @@ export const PostFormProvider = ({ children }) => {
     { id: voteId(), content: '' }
   ]);
   const [uploadWriteVote, setUploadWriteVote] = useState([]);
-  const [images, setImages] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
 
+  // 글쓰기페이지에서 이미지 미리보기 상태
+  const [imagePreviews, setImagePreviews] = useState([]);
+
+  // 이미지, 지도 저장
+  const [postDetailResponses, setPostDetailResponses] = useState({
+    image1: '',
+    image2: '',
+    x: '',
+    y: '',
+  });
 
   // 글쓰기페이지에 투표 첨부
   const addVoteToPost = useCallback(() => {
@@ -41,17 +50,17 @@ export const PostFormProvider = ({ children }) => {
 
 
   // 이미지 추가
-  const addImage = useCallback((image) => {
-    if (images.length < 2) {
-      setImages((prevImages) => [...prevImages, image]);
+  const addImage = useCallback((imagePreview) => {
+    if (imagePreviews.length < 2) {
+      setImagePreviews((prevImages) => [...prevImages, imagePreview]);
     } else {
       alert('이미지는 최대 2개까지 업로드할 수 있습니다.');
     }
-  }, [images]);
+  }, [imagePreviews]);
 
   // 이미지 삭제
   const removeImage = useCallback((index) => {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    setImagePreviews((prevImages) => prevImages.filter((_, i) => i !== index));
   }, []);
 
 
@@ -81,13 +90,12 @@ export const PostFormProvider = ({ children }) => {
 
       // console.log("게시글 데이터:", postId, newPostData);
 
-      // 두 번째 API 호출: 이미지 및 지도 정보 업로드
-      if (images.length > 0) {
-        const formData = new FormData();
-        images.forEach((image, index) => formData.append(`image${index + 1}`, image));
+      const formData = new FormData();
+      formData.append('image1', postDetailResponses.image1);
+      formData.append('image2', postDetailResponses.image2);
 
-        await uploadPostDetail(postId, formData);
-      }
+      await uploadPostDetail(postId, formData);
+
 
       navigate(`/post/${postId}`);
 
@@ -95,12 +103,17 @@ export const PostFormProvider = ({ children }) => {
       console.log(`게시글 작성 등록 오류 : ${error}`);
     }
 
-  }, [category, title, content, uploadWriteVote, images]);
+  }, [category, title, content, uploadWriteVote]);
 
 
 
   // 게시글 수정
   const updatePost = useCallback(async (id) => {
+    if (typeof id !== 'string') {
+      console.error('ID가 문자열이 아닙니다:', id);
+      return;
+    }
+
     const isVoteEmpty = voteItems.every(item => !item.content);
 
     const voteRequest = isVoteEmpty
@@ -110,10 +123,16 @@ export const PostFormProvider = ({ children }) => {
         return acc;
       }, { item1: null, item2: null, item3: null, item4: null });
 
-    const updatedPostData = { category, title, content, voteRequest };
+    const updatedPostData = {
+      category,
+      title,
+      content,
+      voteRequest,
+    };
 
     try {
       await modifyPost(id, updatedPostData);
+      console.log('수정시 페이지 id', id);
       navigate(`/post/${id}`);
 
     } catch (error) {
@@ -134,7 +153,8 @@ export const PostFormProvider = ({ children }) => {
         setVoteItems,
         uploadWriteVote,
         setUploadWriteVote,
-        images,
+        imagePreviews,
+        setImagePreviews,
         addImage,
         removeImage,
         isEdit,

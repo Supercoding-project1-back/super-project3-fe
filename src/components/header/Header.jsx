@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import styles from './Header.module.scss';
 import { Icon } from '../core';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { PostFormContext } from '../../contexts/PostFormContext';
 import { PopupModalContext } from '../../contexts/PopupModalContext';
 import { UserContext } from "../../contexts/UserContext";
 
 const Header = ({ type, location }) => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   // console.log(window.history);
 
   const { isEdit, addPost, updatePost } = useContext(PostFormContext);
@@ -73,7 +75,7 @@ const Header = ({ type, location }) => {
               {!isEdit ? (
                 <button onClick={addPost}>등록</button>
               ) : (
-                <button onClick={updatePost}>완료</button>
+                <button onClick={() => updatePost(id)}>완료</button>
               )}
             </div>
           </header>

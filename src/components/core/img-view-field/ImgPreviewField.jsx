@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './ImgPreviewField.module.scss';
 import { Icon } from '..';
 
-const ImgPreviewField = ({ images, onRemove }) => {
+const ImgPreviewField = ({ imagePreviews, onRemove }) => {
   return (
     <ul className={styles.previewContainer}>
-      {images.map((image, index) => (
+      {imagePreviews.map((image, index) => (
         <li key={index} className={styles.previewWrap}>
           <div className={styles.icon}>
             <Icon type={'IconDelete'} onClick={() => onRemove(index)} />
