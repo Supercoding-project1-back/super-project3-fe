@@ -16,7 +16,6 @@ import { PopupModalContext } from '../../contexts/PopupModalContext';
 
 const PostDetail = () => {
   const { id } = useParams();
-  console.log('현재 ID:', id);
   const navigate = useNavigate();
 
   const [post, setPost] = useState(null);
