@@ -23,6 +23,13 @@ const ImgUploadField = ({ onChange }) => {
     }
   };
 
+  // const handleImageChange = (event) => {
+  //   const file = event?.target.files[0];
+  //   if (file) {
+  //     onChange(file); // 파일 객체를 부모 컴포넌트로 전달
+  //   }
+  // };
+
   return (
     <div
       className={styles.container}

@@ -4,7 +4,8 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const uploadPostDetail = async (postId, formData) => {
   try {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTYxZUBkYXVtLm5ldCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjU5NjM0NzMsImV4cCI6MTcyNTk5OTQ3M30.ywYx9l251uzSvIsyBymCARhxu5pFq4FPl98rTi3GaBI';
 
     const response = await axios.post(
       `${API_BASE_URL}/api/posts/create-postDetail/${postId}`,
@@ -12,10 +13,13 @@ export const uploadPostDetail = async (postId, formData) => {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data'
         },
       }
     );
+
+    console.log('formData', formData);
+    console.log('formData.postDetailResponse', formData.postDetailResponse);
 
     return response.data;
   } catch (error) {
