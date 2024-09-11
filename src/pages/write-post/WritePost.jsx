@@ -16,18 +16,27 @@ import { useParams } from 'react-router';
 const WritePost = () => {
   const { id } = useParams();
 
-  const { setIsEdit, setCategory, setTitle, setContent, setVoteItems, uploadWriteVote, removeVoteToPost, images, setImages, addImage, removeImage } = useContext(PostFormContext);
+  const {
+    setIsEdit,
+    setCategory,
+    setTitle,
+    setContent,
+    setVoteItems,
+    uploadWriteVote,
+    removeVoteToPost,
+    imagePreviews,
+    addImage,
+    removeImage
+  } = useContext(PostFormContext);
   const { Modal, openModalHandler } = useModal(null);
-  // const [images, setImages] = useState([]);
-
 
   useEffect(() => {
     if (id) {  // ID가 있을 경우 수정 모드
       setIsEdit(true);
       // 기존 글 데이터 가져오기
-      const fetchPostData = async (postId) => {
+      const fetchPostData = async (id) => {
         try {
-          const post = await getPostById(postId);
+          const post = await getPostById(id);
           setCategory(post.category);
           setTitle(post.title);
           setContent(post.content);
@@ -38,21 +47,9 @@ const WritePost = () => {
       };
       fetchPostData(id);
     }
+
   }, [id, setCategory, setTitle, setContent, setVoteItems]);
 
-
-  // 이미지 미리보기 설정
-  // const handleImageChange = (newImage) => {
-  //   if (images.length >= 2) {
-  //     alert("이미지는 최대 2개까지 업로드할 수 있습니다.");
-  //     return;
-  //   }
-  //   setImages((prevImages) => [...prevImages, newImage]);
-  // };
-
-  // const handleImageRemove = (index) => {
-  //   setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-  // };
 
   return (
     <div className={styles.container}>
@@ -76,9 +73,9 @@ const WritePost = () => {
 
 
 
-      {images.length > 0 && (
+      {imagePreviews.length > 0 && (
         <section className={styles.imagePreview}>
-          <ImgPreview images={images} onRemove={removeImage} />
+          <ImgPreview imagePreviews={imagePreviews} onRemove={removeImage} />
         </section>
       )}
 

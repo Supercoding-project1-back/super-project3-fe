@@ -18,10 +18,11 @@ const fetchUserLocation = async () => {
       }
     );
 
-    // 응답 데이터 파싱
+    // 응답이 JSON 형식일 경우 바로 데이터 추출
     const responseData = resp.data;
-    const residenceMatch = responseData.match(/residence=([^,]+)/);
-    const residence = residenceMatch ? residenceMatch[1].trim() : "Unknown";
+
+    // residence 값 추출 (JSON에서 직접 접근)
+    const residence = responseData.residence || "Unknown";
 
     return residence; // residence 값 반환
   } catch (error) {

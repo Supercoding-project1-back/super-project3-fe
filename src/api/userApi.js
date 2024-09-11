@@ -20,6 +20,7 @@ export const updateUserData = async (updatedUserData) => {
   }
 };
 
+// 사용자 정보 조회 API (JSON 데이터 처리)
 const fetchUserData = async () => {
   try {
     const token = localStorage.getItem("token");
@@ -38,26 +39,17 @@ const fetchUserData = async () => {
       }
     );
 
-    // 응답 데이터 파싱
+    // 응답이 JSON 형식일 경우 바로 데이터 추출
     const responseData = resp.data;
 
-    // console.log("Response type:", typeof responseData); // 데이터타입 확인
-    // console.log("Response data:", responseData); // 실제 데이터를 확인
-
-    const idMatch = responseData.match(/id=(\d+)/);
-    const emailMatch = responseData.match(/email=([^,]+)/);
-    const nicknameMatch = responseData.match(/nickname=([^,]+)/);
-    const residenceMatch = responseData.match(/residence=([^,]+)/);
-    const profilePictureMatch = responseData.match(/profilePicture=([^,]+)/);
-    const introductionMatch = responseData.match(/introduction=([^,]+)/);
-
+    // JSON 객체에서 데이터 추출
     const userData = {
-      id: idMatch ? idMatch[1].trim() : "",
-      email: emailMatch ? emailMatch[1].trim() : "",
-      nickname: nicknameMatch ? nicknameMatch[1].trim() : "",
-      residence: residenceMatch ? residenceMatch[1].trim() : "",
-      profilePicture: profilePictureMatch ? profilePictureMatch[1].trim() : "",
-      introduction: introductionMatch ? introductionMatch[1].trim() : "",
+      id: responseData.id || "",
+      email: responseData.email || "",
+      nickname: responseData.nickname || "",
+      residence: responseData.residence || "",
+      profilePicture: responseData.profilePicture || "",
+      introduction: responseData.introduction || "",
     };
 
     return userData; // 파싱된 사용자 데이터 반환

@@ -16,6 +16,7 @@ import { PopupModalContext } from '../../contexts/PopupModalContext';
 
 const PostDetail = () => {
   const { id } = useParams();
+  console.log('현재 ID:', id);
   const navigate = useNavigate();
 
   const [post, setPost] = useState(null);
@@ -28,9 +29,10 @@ const PostDetail = () => {
     const fetchPost = async () => {
       try {
         if (typeof id !== 'string') {
-          console.error('잘못된 ID 형식:', id);  // ID가 문자열이 아닌 경우 로그 출력
+          console.log('잘못된 ID 형식:', id);  // ID가 문자열이 아닌 경우 로그 출력
           return;
         }
+
         const data = await getPostById(id);
         console.log(data);
         setPost(data);
@@ -46,9 +48,10 @@ const PostDetail = () => {
   }, [id]);
 
 
-  // 게시글 수정
+  // 게시글 수정페이지로 이동
   const handleModifyPost = async () => {
     navigate(`/post/edit/${id}`, { state: { post } });
+    console.log(post)
   };
 
   if (loading) {
@@ -56,7 +59,7 @@ const PostDetail = () => {
   }
 
   if (!post) {
-    return <div>게시글을 불러오지 못했습니다.</div>;
+    return <div>게시글 수정 후 불러오지 못했습니다.</div>;
   }
 
 
@@ -104,18 +107,11 @@ const PostDetail = () => {
         </section>
 
         <section className={styles.wrap}>
-          {/* <ImgViewField src="https://cafe24img.poxo.com/dinotaeng/web/product/small/202205/b7bb570a94d0732787fc2110ec4bbe6c.png"
-            alt="Example Image"
+          <ImgViewField
+            src={''}
+            alt="게시글 이미지"
             className={styles.img}
-            onErrorSrc="https://example.com/fallback-image.svg" /> */}
-
-          {post.images && post.images.length > 0 && (
-            <ImgViewField
-              src={post.images[0]} // 첫 번째 이미지 URL을 예로 사용
-              alt="게시글 이미지"
-              className={styles.img}
-            />
-          )}
+          />
         </section>
 
         <section className={styles.wrap}>

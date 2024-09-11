@@ -7,7 +7,8 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 // 새 게시글 작성 api
 export const createPost = async (newPostData) => {
   try {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTYxZUBkYXVtLm5ldCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjYwNjE5NTQsImV4cCI6MTcyNjA5Nzk1NH0.Zqdwy_EwULnBpa4esYqroAdOwVX5JgHnNVOrWm183-0';
 
     // voteRequest가 없으면 null로 설정
     const postData = {
@@ -58,15 +59,16 @@ export const getPostById = async (id) => {
 
 
 // 게시글 수정
-export const modifyPost = async (id) => {
+export const modifyPost = async (id, updatePostData) => {
   try {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTYxZUBkYXVtLm5ldCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjYwNjE5NTQsImV4cCI6MTcyNjA5Nzk1NH0.Zqdwy_EwULnBpa4esYqroAdOwVX5JgHnNVOrWm183-0';
 
     const modifiedPostData = {
-      title: post.title,
-      content: post.content,
-      category: post.category,
-      voteRequest: post.voteRequest
+      title: updatePostData.title,
+      content: updatePostData.content,
+      category: updatePostData.category,
+      voteRequest: updatePostData.voteRequest
     };
 
     const response = await axios.put(
@@ -95,7 +97,8 @@ export const modifyPost = async (id) => {
 // 게시글 삭제
 export const deletePost = async (id) => {
   try {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTYxZUBkYXVtLm5ldCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjYwNjE5NTQsImV4cCI6MTcyNjA5Nzk1NH0.Zqdwy_EwULnBpa4esYqroAdOwVX5JgHnNVOrWm183-0';
 
     const response = await axios.delete(`${API_BASE_URL}/api/posts/delete-post/${id}`, {
       headers: {
