@@ -19,6 +19,7 @@ const AppRoutes = createBrowserRouter([
       { path: "addinfo", element: <AddInfo /> },
       { path: "post/:id", element: <PostDetail /> },
       { path: "post/new", element: <WritePost /> },
+      { path: "post/edit/:id", element: <WritePost /> },
       { path: "chat", element: <Chat /> },
       { path: "chat/:id", element: <ChatDetail /> },
       { path: "profile", element: <Profile /> },

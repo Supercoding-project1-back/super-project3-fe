@@ -1,11 +1,11 @@
 @import '../../styles/variables.scss';
 
 .container {
+  padding-top: 5rem;
   padding-bottom: 5rem;
 }
 
 .wrap {
-  // border: 1px solid red;
   padding: 0.5rem;
 
 
@@ -29,6 +29,12 @@
         margin-right: 0.5rem;
         padding: 0.5rem;
         cursor: pointer;
+
+        &>div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
         .icon {
           width: 1.4rem;
