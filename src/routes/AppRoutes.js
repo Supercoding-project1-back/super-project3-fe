@@ -7,13 +7,14 @@ import { PostDetail } from "../pages/post-detail";
 import { WritePost } from "../pages/write-post";
 import { Chat, ChatDetail } from "../pages/chat";
 import { Profile, EditProfile, MyPosts } from "../pages/profile";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRoutes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Main /> },
+      { index: true, element: <ProtectedRoute element={<Main />} /> },
       { path: "login", element: <Login /> },
       { path: "auth/kakao/callback", element: <KakaoRedirect /> },
       { path: "addinfo", element: <AddInfo /> },

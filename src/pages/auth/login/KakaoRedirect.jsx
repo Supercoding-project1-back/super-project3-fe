@@ -12,6 +12,7 @@ const KakaoRedirect = () => {
 
     if (token) {
       localStorage.setItem("token", token);
+      localStorage.setItem("isNewUser", isNewUser);
 
       if (isNewUser) {
         navigate("/addinfo");
