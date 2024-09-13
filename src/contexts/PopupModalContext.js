@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import ModalField from "../components/core/modal-field/ModalField";
 
 export const PopupModalContext = createContext();
@@ -7,14 +7,23 @@ export const PopupModalProvider = ({ children }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupType, setPopupType] = useState('');
 
-  const openPopupHandler = useCallback((type) => {
-    setPopupType(type);
-    setIsPopupOpen(true);
-  }, [])
 
-  const closePopupHandler = useCallback(() => {
+  const openPopupHandler = (type) => {
+    setPopupType(type);
+    if (!isPopupOpen) {
+      setIsPopupOpen(true);
+    }
+  }
+
+  const closePopupHandler = () => {
     setIsPopupOpen(false);
-    setPopupType(null);
+    setPopupType('');
+  }
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      closePopupHandler();
+    }
   }, []);
 
   const Popup = useCallback(({ children, customClass }) => (

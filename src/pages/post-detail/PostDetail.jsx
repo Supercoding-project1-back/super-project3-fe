@@ -33,7 +33,7 @@ const PostDetail = () => {
         }
 
         const data = await getPostById(id);
-        console.log(data);
+        console.log('상세페이지', data);
         setPost(data);
         setLoading(false);
 
@@ -61,6 +61,10 @@ const PostDetail = () => {
     return <div>게시글 수정 후 불러오지 못했습니다.</div>;
   }
 
+  // 이미지 경로 설정
+  const image1Src = post.postDetailResponse?.image1 ? `${process.env.REACT_APP_API_BASE_URL}/${post.postDetailResponse.image1}` : null;
+  const image2Src = post.postDetailResponse?.image2 ? `${process.env.REACT_APP_API_BASE_URL}/${post.postDetailResponse.image2}` : null;
+
 
   const handleDeletePost = async () => {
     try {
@@ -80,6 +84,7 @@ const PostDetail = () => {
   if (!post) {
     return <div>게시글을 불러오지 못했습니다.</div>;
   }
+
 
   return (
     <>
@@ -106,11 +111,21 @@ const PostDetail = () => {
         </section>
 
         <section className={styles.wrap}>
-          <ImgViewField
-            src={''}
-            alt="게시글 이미지"
-            className={styles.img}
-          />
+          {image1Src && (
+            <ImgViewField
+              src={image1Src}
+              alt="게시글 이미지 1"
+              className={styles.img}
+            />
+          )}
+          {image2Src && (
+            <ImgViewField
+              src={image2Src}
+              alt="게시글 이미지 2"
+              className={styles.img}
+            />
+          )}
+
         </section>
 
         <section className={styles.wrap}>
@@ -123,11 +138,11 @@ const PostDetail = () => {
 
         {/* 댓글 영역 */}
         <CommentField postId={post.id} />
-      </div>
+      </div >
 
 
       {/* 게시글 수정/삭제 팝업창 */}
-      <Popup customClass={styles.popupModal}>
+      <Popup Popup customClass={styles.popupModal} >
         {popupType === 'post' && (
           <>
             <div className={styles.buttonWrap} onClick={handleModifyPost}>
@@ -137,8 +152,9 @@ const PostDetail = () => {
               <button>삭제</button>
             </div>
           </>
-        )}
-      </Popup>
+        )
+        }
+      </Popup >
     </>
   )
 };

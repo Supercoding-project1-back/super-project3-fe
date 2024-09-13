@@ -58,7 +58,7 @@ const Header = ({ type, location }) => {
           </header>
         );
 
-      // 글쓰기페이지 헤더 : 뒤로가기+등록
+      // 글쓰기,수정페이지 헤더 : 뒤로가기+등록
       case "write":
         return (
           <header className={`${styles.header} ${styles.writeHeader}`}>
