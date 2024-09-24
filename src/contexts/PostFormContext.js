@@ -26,6 +26,9 @@ export const PostFormProvider = ({ children }) => {
   // 글쓰기페이지에서 이미지 미리보기 상태
   const [imagePreviews, setImagePreviews] = useState([]);
 
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+
   // 이미지, 지도 저장
   const [postDetailResponses, setPostDetailResponses] = useState({
     image1: '',
@@ -88,14 +91,31 @@ export const PostFormProvider = ({ children }) => {
       const response = await createPost(newPostData);
       const postId = response.id;
 
-      // console.log("게시글 데이터:", postId, newPostData);
+      // // console.log("게시글 데이터:", postId, newPostData);
+      // if (imagePreviews.length > 0) {
+      //   const formData = new FormData();
+      //   imagePreviews.forEach((image, index) => {
+      //     formData.append(`image${index + 1}`, image);
+      //   });
 
+      //   // 이미지 및 지도 정보를 서버에 업로드
+      //   const postDetailResponse = await uploadPostDetail(postId, formData);
+      //   setUploadedImages([postDetailResponse.image1, postDetailResponse.image2]); // 업로드된 이미지 상태 저장
+      // }
+
+      // 이미지와 좌표 정보를 포함한 FormData 객체 생성
       const formData = new FormData();
-      formData.append('image1', postDetailResponses.image1);
-      formData.append('image2', postDetailResponses.image2);
 
+      // 이미지 추가
+      if (imagePreviews[0]) formData.append('image1', imagePreviews[0]);
+      if (imagePreviews[1]) formData.append('image2', imagePreviews[1]);
+
+      // 좌표 추가 (필요할 경우)
+      formData.append('x', postDetailResponses.x || '');
+      formData.append('y', postDetailResponses.y || '');
+
+      // 이미지 및 좌표 등록 API 호출
       await uploadPostDetail(postId, formData);
-
 
       navigate(`/post/${postId}`);
 

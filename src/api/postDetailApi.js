@@ -1,13 +1,16 @@
 import axios from "axios";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// API 기본 설정
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+});
 
-
-// 새 게시글 작성 api
+// 새 게시글 작성 API
 export const createPost = async (newPostData) => {
   try {
-    const token = localStorage.getItem('token');
-
     // voteRequest가 없으면 null로 설정
     const postData = {
       title: newPostData.title,
@@ -18,16 +21,11 @@ export const createPost = async (newPostData) => {
 
     console.log("postData :", postData);
 
-    const response = await axios.post(
-      `${API_BASE_URL}/api/posts/create-post`,
-      postData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await api.post("/api/posts/create-post", postData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(`새 게시글 작성 오류: ${error.response?.data || error.message}`);
@@ -39,11 +37,10 @@ export const createPost = async (newPostData) => {
   }
 };
 
-
 // 게시글 상세 페이지 조회
 export const getPostById = async (id) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/posts/post/${id}`);
+    const response = await api.get(`/api/posts/post/${id}`);
     return response.data;
   } catch (error) {
     console.error(`게시글 상세 조회 오류: ${error.response?.data || error.message}`);
@@ -55,29 +52,21 @@ export const getPostById = async (id) => {
   }
 };
 
-
 // 게시글 수정
 export const modifyPost = async (id, updatePostData) => {
   try {
-    const token = localStorage.getItem('token');
-
     const modifiedPostData = {
       title: updatePostData.title,
       content: updatePostData.content,
       category: updatePostData.category,
-      voteRequest: updatePostData.voteRequest
+      voteRequest: updatePostData.voteRequest,
     };
 
-    const response = await axios.put(
-      `${API_BASE_URL}/api/posts/modify-post/${id}`,
-      modifiedPostData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await api.put(`/api/posts/modify-post/${id}`, modifiedPostData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error) {
@@ -88,17 +77,13 @@ export const modifyPost = async (id, updatePostData) => {
       console.log('에러 헤더:', error.response.headers);
     }
   }
-}
-
+};
 
 // 게시글 삭제
 export const deletePost = async (id) => {
   try {
-    const token = localStorage.getItem('token');
-
-    const response = await axios.delete(`${API_BASE_URL}/api/posts/delete-post/${id}`, {
+    const response = await api.delete(`/api/posts/delete-post/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
