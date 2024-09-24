@@ -28,7 +28,7 @@
 ## 화면 구성
 |로그인 페이지|주소 정보 추가|메인 페이지|
 |:---:|:---:|:---:|
-|<img width="300" alt="로그인화면" src="https://github.com/user-attachments/assets/10baa97d-75a4-4042-a6d0-97aeacee1e04">|<img width="300" height="600" alt="주소입력" src="https://github.com/user-attachments/assets/e50e09c1-082c-4fd2-9885-c1f481641dbd">|<img width="300" alt="메인" src="https://github.com/user-attachments/assets/8b495202-0de1-45a9-9d1f-bcfe7837d21f">|
+|<img width="300" alt="로그인화면" src="https://github.com/user-attachments/assets/10baa97d-75a4-4042-a6d0-97aeacee1e04">|<img width="300" alt="주소입력" src="https://github.com/user-attachments/assets/e50e09c1-082c-4fd2-9885-c1f481641dbd">|<img width="300" alt="메인" src="https://github.com/user-attachments/assets/8b495202-0de1-45a9-9d1f-bcfe7837d21f">|
 |상세 페이지|상세페이지(댓글 리스트)|글쓰기 페이지|
 |<img width="300" alt="상세게시글" src="https://github.com/user-attachments/assets/870fc142-c295-4910-b7e5-2d6d9985314d">|<img width="300" alt="상세게시글" src="https://github.com/user-attachments/assets/7b111084-0c90-4915-b5f5-af24827bb4ca">|<img width="300" alt="상세게시글" src="https://github.com/user-attachments/assets/b455c11e-5217-45ba-9afe-7233f690e91e">|
 |프로필 페이지|프로필 페이지(유저 정보 수정)||
