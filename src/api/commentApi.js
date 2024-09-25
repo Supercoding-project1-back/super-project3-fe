@@ -47,9 +47,9 @@ export const createComment = async (postId, content) => {
 export const modifyComment = async (commentId, postId, newContent) => {
   try {
     // 요청 전 데이터 확인
-    console.log('수정할 댓글 ID:', commentId);
-    console.log('수정할 포스트 ID:', postId);
-    console.log('수정할 댓글 내용:', newContent);
+    // console.log('수정할 댓글 ID:', commentId);
+    // console.log('수정할 포스트 ID:', postId);
+    // console.log('수정할 댓글 내용:', newContent);
 
     const response = await api.put(
       `/api/comments/modify-comment/${commentId}`,
