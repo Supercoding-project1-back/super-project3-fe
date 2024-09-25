@@ -1,17 +1,19 @@
 import axios from "axios";
 
+//APi 기본 설정
+const api = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+});
+
 // 사용자 정보 업데이트 API
 export const updateUserData = async (updatedUserData) => {
   try {
-    const token = localStorage.getItem("token");
-    const response = await axios.put(
-      `${process.env.REACT_APP_API_BASE_URL}/api/users/me`,
-      updatedUserData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    const response = await api.put(
+      `/api/users/me`,
+      updatedUserData
     );
     return response.data; // 성공 시 응답 데이터 반환
   } catch (error) {
@@ -29,15 +31,11 @@ const fetchUserData = async () => {
       throw new Error("유저 정보가 없습니다. 로그인 해주세요.");
     }
 
-    const resp = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}api/users/me`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const resp = await api.get("/api/users/me", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     // 응답이 JSON 형식일 경우 바로 데이터 추출
     const responseData = resp.data;
