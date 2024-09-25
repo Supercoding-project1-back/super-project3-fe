@@ -21,7 +21,12 @@ const PostDetail = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { Popup, popupType } = useContext(PopupModalContext);
+  const { Popup, popupType, closePopupHandler } = useContext(PopupModalContext);
+
+  useEffect(() => {
+    // 상세페이지 id가 바뀔 때 팝업 상태 초기화
+    closePopupHandler();
+  }, [id]);
 
   // 상세페이지 리스트
   useEffect(() => {

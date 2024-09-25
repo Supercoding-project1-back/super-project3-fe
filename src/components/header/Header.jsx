@@ -46,6 +46,7 @@ const Header = ({ type, location }) => {
           </header>
         );
 
+      // 상세페이지 헤더 : 뒤로가기+(더보기버튼)
       case "detail":
         return (
           <header className={`${styles.header} ${styles.detailHeader}`}>
