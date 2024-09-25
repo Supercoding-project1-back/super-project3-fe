@@ -53,9 +53,9 @@ const CommentField = ({ postId }) => {
 
 
   // 댓글 수정
-  const editComment = async (commentId, newText) => {
+  const editComment = async (commentId, newContent) => {
     try {
-      const updatedComment = await modifyComment(commentId, postId, newText);
+      const updatedComment = await modifyComment(commentId, postId, newContent);
       setComments(comments.map((comment) =>
         comment.commentId === commentId ? { ...comment, content: updatedComment.content } : comment
       ));
@@ -108,7 +108,7 @@ const CommentField = ({ postId }) => {
       <CommentInput
         addComment={handleCommentInputSubmit}
         editComment={isEditing ? handleCommentInputSubmit : null}
-        initialText={isEditing?.text || ''}
+        initialText={isEditing?.content || ''}
       />
     </div >
   );

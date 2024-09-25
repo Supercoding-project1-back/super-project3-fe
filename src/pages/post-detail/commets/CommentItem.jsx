@@ -27,7 +27,7 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
         <div className={styles.commentItemHeader}>
           <div className={styles.nickname}>{comment.nickname}</div>
           <div className={styles.iconWrap}>
-            <div onClick={() => onEditClick(comment.commentId, comment.text)}>
+            <div onClick={() => onEditClick(comment.commentId, comment.content)}>
               <Icon
                 type={'IconEdit'}
                 className={styles.icon}
