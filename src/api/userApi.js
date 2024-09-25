@@ -30,7 +30,7 @@ const fetchUserData = async () => {
     }
 
     const resp = await axios.get(
-      `${process.env.REACT_APP_API_BASE_URL}/api/users/me`,
+      `${process.env.REACT_APP_API_BASE_URL}api/users/me`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

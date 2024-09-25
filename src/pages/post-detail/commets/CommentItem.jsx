@@ -2,7 +2,16 @@ import React from 'react';
 import styles from './CommentItem.module.scss';
 import { Icon } from '../../../components/core';
 
-const CommentItem = ({ comment, onEditClick, deleteComment }) => {
+const CommentItem = ({
+  loggedInUserId,
+  comment,
+  onEditClick,
+  deleteComment
+}) => {
+
+  const isAuthor = comment.userId === loggedInUserId;
+  console.log(isAuthor, comment.userId, loggedInUserId);
+
   const handleDeleteClick = (event) => {
     event.stopPropagation();
     deleteComment(comment.commentId);
@@ -27,18 +36,22 @@ const CommentItem = ({ comment, onEditClick, deleteComment }) => {
         <div className={styles.commentItemHeader}>
           <div className={styles.nickname}>{comment.nickname}</div>
           <div className={styles.iconWrap}>
-            <div onClick={() => onEditClick(comment.commentId, comment.text)}>
-              <Icon
-                type={'IconEdit'}
-                className={styles.icon}
-              />
-            </div>
-            <div onClick={handleDeleteClick}>
-              <Icon
-                type={'IconDelete'}
-                className={styles.icon}
-              />
-            </div>
+            {isAuthor && (
+              <>
+                <div onClick={() => onEditClick(comment.commentId, comment.content)}>
+                  <Icon
+                    type={'IconEdit'}
+                    className={styles.icon}
+                  />
+                </div>
+                <div onClick={handleDeleteClick}>
+                  <Icon
+                    type={'IconDelete'}
+                    className={styles.icon}
+                  />
+                </div>
+              </>
+            )}
             <div>
               <Icon
                 type={'IconChat'}
