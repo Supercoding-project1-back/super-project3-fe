@@ -3,10 +3,14 @@ import styles from './CommentField.module.scss';
 import CommentList from './CommentList';
 import CommentInput from './CommentInput';
 import { createComment, deleteCommentApi, getCommentList, modifyComment } from '../../../api/commentApi';
+import fetchUserData from '../../../api/userApi';
 
 const CommentField = ({ postId }) => {
   // 댓글 상태 관리
   const [comments, setComments] = useState([]);
+
+  // 로그인한 유저 ID 상태
+  const [loggedInUserId, setLoggedInUserId] = useState(null);
 
   // 댓글 수정 상태
   const [isEditing, setIsEditing] = useState(null);
@@ -14,6 +18,16 @@ const CommentField = ({ postId }) => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
 
+  useEffect(() => {
+    const fetchLoggedInUser = async () => {
+      const userData = await fetchUserData();
+      if (userData) {
+        setLoggedInUserId(userData.id);
+      }
+    };
+
+    fetchLoggedInUser();
+  }, []);
 
 
   // 댓글리스트 가져오기
@@ -44,6 +58,9 @@ const CommentField = ({ postId }) => {
           commentId: newComment.commentId,
           content: newComment.content,
           nickname: newComment.nickname,
+          profilePicture: newComment.profilePicture,
+          userId: newComment.userId,
+          created_at: newComment.created_at,
         },
       ]);
     } catch (error) {
@@ -94,6 +111,7 @@ const CommentField = ({ postId }) => {
       {
         comments.length > 0 ? (
           <CommentList
+            loggedInUserId={loggedInUserId}
             comments={comments}
             onEditClick={(commentId, content) => setIsEditing({ commentId, content })}
             deleteComment={deleteComment}
