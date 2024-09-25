@@ -10,9 +10,7 @@ export const PopupModalProvider = ({ children }) => {
 
   const openPopupHandler = (type) => {
     setPopupType(type);
-    if (!isPopupOpen) {
-      setIsPopupOpen(true);
-    }
+    setIsPopupOpen(true);
   }
 
   const closePopupHandler = () => {
